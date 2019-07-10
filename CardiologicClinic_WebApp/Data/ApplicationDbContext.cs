@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,6 @@ namespace CardiologicClinic_WebApp.Data
             : base(options)
         {
         }
+       // public DbSet<User> Users { get; set; }
     }
 }
