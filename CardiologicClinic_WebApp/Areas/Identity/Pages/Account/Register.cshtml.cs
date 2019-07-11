@@ -45,14 +45,14 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "{0} musi mieć conajmniej {2} i maksymalnie {1} znaków.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} musi mieć conajmniej {2} i maksymalnie {1} znaków..", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Potwierdź hasło")]
-            [Compare("Password", ErrorMessage = "Wprowadzone hasła róznią się od siebie.")]
+            [Compare("Password", ErrorMessage = "Wprowadzone hasła różnią się od siebie.")]
             public string ConfirmPassword { get; set; }
         }
 

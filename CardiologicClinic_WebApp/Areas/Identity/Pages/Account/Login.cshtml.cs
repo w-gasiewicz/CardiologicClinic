@@ -44,7 +44,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Zapamiętaj mnie")]
+            [Display(Name = "Zapamiętaj dane")]
             public bool RememberMe { get; set; }
         }
 
@@ -90,7 +90,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Nieudana próba logowania.");
                     return Page();
                 }
             }
