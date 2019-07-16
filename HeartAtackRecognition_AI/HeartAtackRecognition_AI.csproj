@@ -102,7 +102,15 @@
   <ItemGroup>
     <Compile Include="Models\FeedBackPrediction.cs" />
     <Compile Include="Models\FeedBackTrainingData.cs" />
+    <Compile Include="Models\PatientComponents\AssociatedSymptoms.cs" />
+    <Compile Include="Models\PatientComponents\CurrentMedicationUsage.cs" />
+    <Compile Include="Models\PatientComponents\EcgExamination.cs" />
+    <Compile Include="Models\PatientComponents\General.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\PatientComponents\HistoryOfSimilarPain.cs" />
+    <Compile Include="Models\PatientComponents\Pain.cs" />
+    <Compile Include="Models\PatientComponents\PastMedicalHistory.cs" />
+    <Compile Include="Models\PatientComponents\PhysicalExaminations.cs" />
     <Compile Include="Procedures\LoadFiles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
