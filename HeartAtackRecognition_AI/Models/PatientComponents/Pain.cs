@@ -11,7 +11,7 @@
 
         public Pain(int painLocationToSet, int chestPainRadiationToSet, int painCharacterToSet, int onsetOfPainToSet, int numberOfHoursSinceOnsetToSet, int durationOfTheLastEpisodeToSet)
         {
-            this.painLocation = painCharacterToSet;
+            this.painLocation = painLocationToSet;
             this.chestPainRadiation = chestPainRadiationToSet;
             this.painCharacter = painCharacterToSet;
             this.onsetOfPain = onsetOfPainToSet;

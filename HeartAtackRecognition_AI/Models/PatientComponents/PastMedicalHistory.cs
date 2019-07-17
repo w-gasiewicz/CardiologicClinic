@@ -21,6 +21,7 @@
             this.congestiveHeartFailure = congestiveHeartFailureToSet;
             this.peripheralVascularDisease = peripheralVascularDiseaseToSet;
             this.hiatalHernia = hiatalHerniaToSet;
+            this.hypertension = hypertensionToSet;
             this.diabetes = diabetesToSet;
             this.smoker = smokerToSet;
         }
