@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CardiologicClinic_WebApp.Models;
+using HeartAtackRecognition_AI.Procedures;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -15,14 +16,14 @@ namespace CardiologicClinic_WebApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Opis przychodni kardiologicznej.";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Strona kontaktowa.";
 
             return View();
         }
@@ -36,6 +37,11 @@ namespace CardiologicClinic_WebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public void LoadAIData()
+        {
+            LoadFiles loader = new LoadFiles();
+            loader.OpenFile();
         }
     }
 }

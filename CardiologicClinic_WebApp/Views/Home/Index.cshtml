@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona domowa";
 }
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -90,5 +90,17 @@
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
         </ul>
+    </div>
+    <div class="col-md-3">
+        <h2> Test</h2>
+        <ul>
+            <form>
+                <button name="button" value="test" asp-action="Check">test</button>
+            </form>
+            <a class="btn btn-default"asp-action="Check">
+                test2
+            </a>
+        </ul>
+        @TempData["test"];
     </div>
 </div>
