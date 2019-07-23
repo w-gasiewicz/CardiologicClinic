@@ -1,11 +1,11 @@
-﻿using HeartAtackRecognition_AI.Models;
-using HeartAtackRecognition_AI.Models.PatientComponents;
+﻿using CardiologicClinic_WebApp.AI.Models;
+using CardiologicClinic_WebApp.AI.Models.PatientComponents;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace HeartAtackRecognition_AI.Procedures
+namespace CardiologicClinic_WebApp.AI.Procedures
 {
     public class LoadFiles
     {
@@ -35,9 +35,9 @@ namespace HeartAtackRecognition_AI.Procedures
                 }
             }
 
-            int numberOfRecords = list[list.Count-1].Count(c => char.IsDigit(c));
+            int numberOfRecords = list[list.Count - 1].Count(c => char.IsDigit(c));
             Console.WriteLine("Data loading started!");
-            for (int k = 0; k < numberOfRecords-1; k++)
+            for (int k = 0; k < numberOfRecords - 1; k++)
             {
                 for (int i = 0; i < list.Count; i++)//petla budujaca obiekty klientow z pobranych wczesniej danych
                 {
@@ -63,13 +63,14 @@ namespace HeartAtackRecognition_AI.Procedures
                     patient = new Patient(general, pain, associatedSymptoms, historyOfSimilarPain, pastMedicalHistory, currentMedicationUsage, physicalExaminations, ecgExamination);
 
                     s = list[i].Split('\t')[0];
-                   // Console.WriteLine(s);
+                    // Console.WriteLine(s);
                     list[i] = list[i].Remove(0, s.Length + 1);
                     patientsList.Add(patient);
                 }
-               // Console.WriteLine("=============");
+                // Console.WriteLine("=============");
             }
             Console.WriteLine("Data loaded!");
         }
     }
 }
+

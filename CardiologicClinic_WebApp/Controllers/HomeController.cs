@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CardiologicClinic_WebApp.Models;
-using HeartAtackRecognition_AI.Procedures;
+using CardiologicClinic_WebApp.AI.Procedures;
+using CardiologicClinic_WebApp.AI;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -28,6 +27,13 @@ namespace CardiologicClinic_WebApp.Controllers
             return View();
         }
 
+        public IActionResult HeartAttack()
+        {
+            ViewData["Message"] = "Moduł wykrywający zawał serca.";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -40,8 +46,8 @@ namespace CardiologicClinic_WebApp.Controllers
         }
         public void LoadAIData()
         {
-            LoadFiles loader = new LoadFiles();
-            loader.OpenFile();
+            RunAIAlgorythm start = new RunAIAlgorythm();
+            start.RunAI();
         }
     }
 }
