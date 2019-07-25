@@ -34,6 +34,11 @@ namespace CardiologicClinic_WebApp.Controllers
             return View();
         }
 
+        public IActionResult PriceList()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -44,6 +49,7 @@ namespace CardiologicClinic_WebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         public void LoadAIData()
         {
             RunAIAlgorythm start = new RunAIAlgorythm();
