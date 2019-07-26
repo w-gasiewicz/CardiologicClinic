@@ -4,14 +4,51 @@
     ViewData["Title"] = "Nowa wizyta";
     ViewData["ActivePage"] = ManageNavPages.NewVisit;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <environment include="Development"> 
+        <link rel="stylesheet" href="~/css/NewVisitSubMenucss.css" type="text/css" />
+    </environment> 
 
-<h4>@ViewData["Title"]</h4>
+</head>
+<body>
+    @*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*@
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="nav-side-menu">
+        <div class="brand">Umów nową wizytę</div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content">Umów wizytę</i>
 
-<div class="row">
-    <div class="col-md-6">
-        <form id="change-password-form" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <button type="submit" class="btn btn-default">Umów wizytę</button>
-        </form>
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                    </a>
+                </li>
+                <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                    <a href="#"><i class="fa fa-users fa-lg"></i> Lekarz <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <li class="active"><a href="#">CSS3 Animation</a></li>
+                    <li><a href="#">General</a></li>
+                    <li><a href="#">Buttons</a></li>
+                    <li><a href="#">Tabs & Accordions</a></li>
+                    <li><a href="#">Typography</a></li>
+                    <li><a href="#">FontAwesome</a></li>
+                    <li><a href="#">Slider</a></li>
+                    <li><a href="#">Panels</a></li>
+                    <li><a href="#">Widgets</a></li>
+                    <li><a href="#">Bootstrap Model</a></li>
+                </ul>
+            </ul>
+        </div>
     </div>
-</div>
+</body>
+</html>
