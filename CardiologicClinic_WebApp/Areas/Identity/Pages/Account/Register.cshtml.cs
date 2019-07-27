@@ -17,17 +17,21 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            RoleManager<IdentityRole> roleManager,
+        ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -54,6 +58,10 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             [Display(Name = "Potwierdź hasło")]
             [Compare("Password", ErrorMessage = "Wprowadzone hasła różnią się od siebie.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Typ użytkownika")]
+            public string UserType { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -66,12 +74,12 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    result = await _userManager.AddToRoleAsync(user,Input.UserType);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
