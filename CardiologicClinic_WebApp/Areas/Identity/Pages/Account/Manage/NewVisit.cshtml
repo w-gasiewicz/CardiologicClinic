@@ -7,48 +7,50 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta charset="utf-8" />
-    <environment include="Development"> 
+    <environment include="Development">
         <link rel="stylesheet" href="~/css/NewVisitSubMenucss.css" type="text/css" />
-    </environment> 
+    </environment>
 
 </head>
 <body>
     @*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*@
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="nav-side-menu">
-        <div class="brand">Umów nową wizytę</div>
-        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content">Umów wizytę</i>
-
-        <div class="menu-list">
-
-            <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                    </a>
-                </li>
-                <li data-toggle="collapse" data-target="#products" class="collapsed active">
-                    <a href="#"><i class="fa fa-users fa-lg"></i> Lekarz <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="products">
-                    <li class="active"><a href="#">CSS3 Animation</a></li>
-                    <li><a href="#">General</a></li>
-                    <li><a href="#">Buttons</a></li>
-                    <li><a href="#">Tabs & Accordions</a></li>
-                    <li><a href="#">Typography</a></li>
-                    <li><a href="#">FontAwesome</a></li>
-                    <li><a href="#">Slider</a></li>
-                    <li><a href="#">Panels</a></li>
-                    <li><a href="#">Widgets</a></li>
-                    <li><a href="#">Bootstrap Model</a></li>
-                </ul>
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarz 1<span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a> 
+            <ul class="dropdown-menu">
+                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
             </ul>
-        </div>
-    </div>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarzyk 2 <span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarzyk 3 <span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarzyk 4 <span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
+            </ul>
+        </li>
+    </ul>
 </body>
 </html>
