@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardiologicClinic_WebApp", "CardiologicClinic_WebApp\CardiologicClinic_WebApp.csproj", "{93C983C6-7C64-4E8C-8751-759C2F001E48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartAtackRecognition_AI", "HeartAtackRecognition_AI\HeartAtackRecognition_AI.csproj", "{D1D335A8-D00B-462B-A002-446B880DD317}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{93C983C6-7C64-4E8C-8751-759C2F001E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93C983C6-7C64-4E8C-8751-759C2F001E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93C983C6-7C64-4E8C-8751-759C2F001E48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1D335A8-D00B-462B-A002-446B880DD317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1D335A8-D00B-462B-A002-446B880DD317}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1D335A8-D00B-462B-A002-446B880DD317}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1D335A8-D00B-462B-A002-446B880DD317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

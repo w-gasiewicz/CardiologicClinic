@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using CardiologicClinic_WebApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 using System;
 
 namespace CardiologicClinic_WebApp
@@ -36,27 +35,9 @@ namespace CardiologicClinic_WebApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
-        private async Task CreateUserRoles(IServiceProvider serviceProvider)
-        {
-            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            IdentityResult roleResult;
-            //Adding Admin Role 
-            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
-            if (!roleCheck)
-            {
-                //create the roles and seed them to the database 
-                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
-            }
-            //Assign Admin role to the main User here we have given our newly registered  
-            //login id for Admin management 
-            IdentityUser user = await UserManager.FindByEmailAsync("syedshanumcain@gmail.com");
-            var User = new IdentityUser();
-            await UserManager.AddToRoleAsync(user, "Admin");
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
@@ -84,7 +65,6 @@ namespace CardiologicClinic_WebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            CreateUserRoles(services).Wait();
         }
     }
 }

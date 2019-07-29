@@ -9,11 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20190709171716_InitialCreate.cs" />
-    <Compile Remove="Data\Migrations\20190709171716_InitialCreate.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DHTMLX.Scheduler.NET" Version="4.0.1" />
     <PackageReference Include="DHTMLX.Scheduler.NET.Responsive" Version="1.0.2" />
     <PackageReference Include="Google.Apis" Version="1.40.2" />
@@ -24,13 +19,9 @@
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HeartAtackRecognition_AI\HeartAtackRecognition_AI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

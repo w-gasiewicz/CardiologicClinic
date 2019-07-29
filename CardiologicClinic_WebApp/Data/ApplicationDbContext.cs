@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardiologicClinic_WebApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+     {
+        public ApplicationDbContext()
         {
         }
-       // public DbSet<User> Users { get; set; }
-    }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+             : base(options)
+         {
+         }
+     }
+   
 }
