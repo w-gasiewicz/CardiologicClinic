@@ -9,9 +9,10 @@ namespace CardiologicClinic_WebApp.AI.Procedures
 {
     public class LoadFiles
     {
-        private string path = @"C:\Users\FUJITSU\source\repos\CardiologicClinic_WebApp\HeartAtackRecognition_AI\Data\inne.txt";
+        private string path = @"C:\Users\FUJITSU\source\repos\CardiologicClinic_WebApp\CardiologicClinic_WebApp\HeartData\inne.txt";
         List<Patient> patientsList = new List<Patient>();
         private Patient patient;
+        public bool loadingStatus=false;
 
         private bool SetBoolValue(int value)
         {
@@ -63,13 +64,12 @@ namespace CardiologicClinic_WebApp.AI.Procedures
                     patient = new Patient(general, pain, associatedSymptoms, historyOfSimilarPain, pastMedicalHistory, currentMedicationUsage, physicalExaminations, ecgExamination);
 
                     s = list[i].Split('\t')[0];
-                    // Console.WriteLine(s);
                     list[i] = list[i].Remove(0, s.Length + 1);
                     patientsList.Add(patient);
                 }
-                // Console.WriteLine("=============");
             }
             Console.WriteLine("Data loaded!");
+            loadingStatus = true;
         }
     }
 }

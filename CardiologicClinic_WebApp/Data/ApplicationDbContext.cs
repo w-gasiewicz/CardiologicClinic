@@ -9,7 +9,7 @@ namespace CardiologicClinic_WebApp.Data
         public ApplicationDbContext()
         {
         }
-
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
              : base(options)
          {

@@ -1,6 +1,10 @@
-﻿@{
+﻿@model HeartDataInputModel
+@{
     ViewData["Title"] = "Moduł wykrywający zawał serca";
+    LoadFiles loading = new LoadFiles();
+    HeartDataInputModel model = new HeartDataInputModel();
 }
+@using CardiologicClinic_WebApp.AI.Procedures;
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
@@ -12,7 +16,42 @@
         <h2> Test</h2>
         @TempData["test"]
         <ul>
-            <form><button asp-area="" asp-controller="Home" asp-action="LoadAIData">Kontakt</button></form>
+            <form><button asp-area="" asp-controller="Home" asp-action="LoadAIData">Trenuj</button></form>
+            <h2>@loading.loadingStatus</h2>
         </ul>
+
+        <form asp-route-returnUrl="@Model" method="post">
+            <h4>Stwórz nowe konto użytkownika.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Age"></label>
+                <input asp-for="Input.Age" class="form-control" />
+                <span asp-validation-for="Input.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Sex"></label>
+                <select asp-for="Input.Sex">
+                    <option value="1">Mężczyzna</option>
+                    <option value="0">Kobieta</option>
+                </select>
+                <span asp-validation-for="Input.Sex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PainLocation"></label>
+                <select asp-for="Input.PainLocation">
+                    <option value="1">Mężczyzna</option>
+                    <option value="2">Kobieta</option>
+                    <option value="3">Mężczyzna</option>
+                    <option value="4">Kobieta</option>
+                    <option value="5">Mężczyzna</option>
+                    <option value="6">Kobieta</option>
+                    <option value="7">Plecy</option>
+                    <option value="8">Inna</option>
+                </select>
+                <span asp-validation-for="Input.Sex" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Zbadaj objawy</button>
+        </form>
     </div>
 </div>

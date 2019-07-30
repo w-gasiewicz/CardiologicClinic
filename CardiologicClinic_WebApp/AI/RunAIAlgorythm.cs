@@ -15,7 +15,6 @@ namespace CardiologicClinic_WebApp.AI
 
         public void RunAI()
         { //Load the trainingdata
-
             LoadFiles lf = new LoadFiles();
             lf.OpenFile();
 
