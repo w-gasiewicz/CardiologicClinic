@@ -16,7 +16,6 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
@@ -24,13 +23,11 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager,
         ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -58,8 +55,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "Wprowadzone hasła różnią się od siebie.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
-            public string Function { get; set; }
+            //[Required]
+            //public string UserRole { get; set; }
         }
 
         public void OnGet(string returnUrl = null)

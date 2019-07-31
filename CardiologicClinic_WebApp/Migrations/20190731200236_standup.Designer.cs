@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardiologicClinic_WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190730193517_function4")]
-    partial class function4
+    [Migration("20190731200236_standup")]
+    partial class standup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,8 +100,7 @@ namespace CardiologicClinic_WebApp.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
+                    b.Property<string>("Function");
 
                     b.HasKey("Id");
 

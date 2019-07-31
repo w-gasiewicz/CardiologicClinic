@@ -10,7 +10,7 @@
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Dane osobowe</a></li>
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./AppointmentCalendar">Kalendarz wizyt</a></li>
 
-    @if (User.Identity.IsAuthenticated/* role.GetUserNameAsync(this.User) == "Admin"*/)
+    @if (/*User.Identity.IsAuthenticated*/ role.GetUserRole(this.User/*.Identity.Name*/) == "Admin")
     {
         <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
     }

@@ -1,31 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using CardiologicClinic_WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
     public class UserController : Controller
     {
-        UserManager<IdentityUser> _UserManager;
+        private string _connectionString;//= @"Server=(localdb)\\mssqllocaldb;Database=CardioDB;AttachDBFileName=C:\\Users\\FUJITSU\\CardioDB.mdf;Trusted_Connection=True;MultipleActiveResultSets=true";
+        DbContextOptionsBuilder<ApplicationDbContext> _optionsBuilder;
+
         public IActionResult Index()
         {
             return View();
         }
-        public async Task<string> GetUserNameAsync(ClaimsPrincipal user)
+        public string GetConnectionString()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            //var blog1 = context.Users.Where(b => b. == "ADO.NET Blog")
-            //                   .Include(b => b.Posts)
-            //                   .FirstOrDefault();
-            var currentUser = await _UserManager.GetUserAsync(User);
-            //var displayName = currentUser.;
-            string name = user.FindFirst(ClaimTypes.Name).Value;
-            return name;
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json");
+
+            IConfiguration Configuration = builder.Build();
+            return Configuration["ConnectionStrings:DefaultConnection"];
+        }
+        public string GetUserRole(ClaimsPrincipal user)
+        {
+            return "Admin";
+            _connectionString = GetConnectionString();
+            _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            _optionsBuilder.UseSqlServer(_connectionString);
+            using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
+            {
+                var role = _context.Users.FromSql($"SELECT UserRole From AspNetUsers Where UserName = {user.Identity.Name}").FirstOrDefault();
+                return role.ToString();
+            }
         }
     }
 }

@@ -8,8 +8,6 @@ using CardiologicClinic_WebApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using CardiologicClinic_WebApp.Controllers;
-using CardiologicClinic_WebApp.Models.ViewModel;
 
 namespace CardiologicClinic_WebApp
 {
@@ -25,14 +23,8 @@ namespace CardiologicClinic_WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-            //{
-            //    options.User.RequireUniqueEmail = true;
-            //}).AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
