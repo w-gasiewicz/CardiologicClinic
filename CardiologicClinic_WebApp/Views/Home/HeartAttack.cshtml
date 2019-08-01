@@ -11,17 +11,11 @@
 <p>Tutaj będzie ai na atak serca.</p>
 <p>Przychodnia oferuje pomoc lekarską w zakresie kardiologicznym.</p>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2> Test</h2>
-        @TempData["test"]
-        <ul>
-            <form><button asp-area="" asp-controller="Home" asp-action="LoadAIData">Trenuj</button></form>
-            <h2>@loading.loadingStatus</h2>
-        </ul>
+<h4>Wypełnij formularz abyśmy mogli zbadać Twoje dane modułem diagnostycznym.</h4>
 
+<div class="row">
+    <div class="col-md-6">
         <form asp-route-returnUrl="@Model" method="post">
-            <h4>Stwórz nowe konto użytkownika.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -49,9 +43,194 @@
                     <option value="7">Plecy</option>
                     <option value="8">Inna</option>
                 </select>
-                <span asp-validation-for="Input.Sex" class="text-danger"></span>
+                <span asp-validation-for="Input.PainLocation" class="text-danger"></span>
+            </div> <div class="form-group">
+                <label asp-for="Input.ChestPainRadiation"></label>
+                <select asp-for="Input.ChestPainRadiation">
+                    <option value="1">Szyja</option>
+                    <option value="2">Szczęka</option>
+                    <option value="3">Lewe ramię</option>
+                    <option value="4">Lewa ręka</option>
+                    <option value="5">Prawe ramię</option>
+                    <option value="6">Plecy</option>
+                    <option value="7">Brzuch</option>
+                    <option value="8">Inne</option>
+                </select>
+                <span asp-validation-for="Input.ChestPainRadiation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PainCharacter"></label>
+                <select asp-for="Input.PainCharacter">
+                    <option value="1">Stały</option>
+                    <option value="2">Epizodyczny</option>
+                    <option value="3">Raczej epizodyczny niż stały</option>
+                    <option value="4">Raczej stały niż epizodyczny</option>
+                    <option value="5">Tępy</option>
+                    <option value="6">Ostry</option>
+                    <option value="7">Palący</option>
+                    <option value="8">Opłucowny</option>
+                </select>
+                <span asp-validation-for="Input.PainCharacter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.OnsetOfPain"></label>
+                <select asp-for="Input.OnsetOfPain">
+                    <option value="1">??????</option>
+                    <option value="2">Podczas odpoczynku</option>
+                    <option value="3">Podczas snu</option>
+                </select>
+                <span asp-validation-for="Input.OnsetOfPain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.NumOfHoursSinceOnset"></label>
+                <input asp-for="Input.NumOfHoursSinceOnset" class="form-control" />
+                <span asp-validation-for="Input.NumOfHoursSinceOnset" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.DurationOfTheLastEpisode"></label>
+                <select asp-for="Input.DurationOfTheLastEpisode">
+                    <option value="1">Mniej niż 5 minut</option>
+                    <option value="2">5 - 30 minut</option>
+                    <option value="3">30 - 60 minut</option>
+                    <option value="4">1 - 6 godzin</option>
+                    <option value="5">6 - 12 godzin</option>
+                    <option value="6">Powyżej 12 godzin</option>
+                </select>
+                <span asp-validation-for="Input.DurationOfTheLastEpisode" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Nausea"></label>
+                <select asp-for="Input.Nausea">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Nausea" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Diaphoresis"></label>
+                <select asp-for="Input.Diaphoresis">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Diaphoresis" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Palpitations"></label>
+                <select asp-for="Input.Palpitations">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Palpitations" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Dyspnea"></label>
+                <select asp-for="Input.Dyspnea">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Dyspnea" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Dizziness"></label>
+                <select asp-for="Input.Dizziness">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Dizziness" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Burping"></label>
+                <select asp-for="Input.Burping">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Burping" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PalliativeFactors"></label>
+                <select asp-for="Input.PalliativeFactors">
+                    <option value="1">Brak</option>
+                    <option value="2">Odczucie ulgi poprzez podanie nitrogliceryny w przeciągu 5 minut</option>
+                    <option value="3">Odczucie ulgi poprzez podanie nitrogliceryny w czasie dłuższym niż 5 minut</option>
+                    <option value="4">związek zobojętniający kwasy</option>
+                    <option value="5">Niewrażliwość na ból z wyjątkiem morfiny</option>
+                    <option value="6">Morfina</option>
+                </select>
+                <span asp-validation-for="Input.PalliativeFactors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.HistoryOfSimilarPain"></label>
+                <select asp-for="Input.HistoryOfSimilarPain">
+                    <option value="1">Występowanie podobnych bóli w przeszłości</option>
+                    <option value="2">Konsultacja z lekarzem z powodu poprzednich bóli</option>
+                    <option value="3">Wcześniejszy ból związany z sercem</option>
+                    <option value="4">Wcześniejszy ból związany z zawałem serca</option>
+                    <option value="5">Wcześniejszy ból związany z chorobą niedokrwienną serca</option>
+                </select>
+                <span asp-validation-for="Input.HistoryOfSimilarPain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PastMedicalHistory"></label>
+                <select asp-for="Input.PastMedicalHistory">
+                    <option value="1">Zawał serca</option>
+                    <option value="2">Dławica piersiowa</option>
+                    <option value="3">Nietypowy ból w klatce piersiowej</option>
+                    <option value="4">Niewydolność serca</option>
+                    <option value="5">Choroby naczyń obwodowych</option>
+                    <option value="6">Przepuklina rozworu protytowego przepony</option>
+                    <option value="7">Nadciśnienie</option>
+                    <option value="8">Cukrzyca</option>
+                    <option value="9">Palacz</option>
+                </select>
+                <span asp-validation-for="Input.PastMedicalHistory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.CurrentMedicationUsage"></label>
+                <select asp-for="Input.CurrentMedicationUsage">
+                    <option value="1">Leki moczopędne</option>
+                    <option value="2">Azotany</option>
+                    <option value="3">Beta bloker - lek na serce</option>
+                    <option value="4">Naparstnica</option>
+                    <option value="5">Niesterydowy przeciwzapalny</option>
+                    <option value="6">Związek zobojętniający kwasy</option>
+                </select>
+                <span asp-validation-for="Input.CurrentMedicationUsage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhysicalExaminations"></label>
+                <select asp-for="Input.PhysicalExaminations">
+                    <option value="1">Skurczowe ciśnienie krwi</option>
+                    <option value="2">Rozkurczowe ciśnienie krwi</option>
+                    <option value="3">Tętno</option>
+                    <option value="4">Częstotliwość oddechów na minutę</option>
+                    <option value="5">Rzężenie</option>
+                    <option value="6">Sinica</option>
+                    <option value="7">Bladość</option>
+                    <option value="8">Szmer sercowy skurczowy</option>
+                    <option value="9">Szmer sercowy rozkurczowy</option>
+                    <option value="10">Obrzęk</option>
+                    <option value="11">?????????????</option>
+                    <option value="12">?????????????</option>
+                    <option value="13">Wrażliwość ścian klatki piersiowej</option>
+                    <option value="14">Diaforeza</option>
+                </select>
+                <span asp-validation-for="Input.PhysicalExaminations" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.EcgExamination"></label>
+                <select asp-for="Input.EcgExamination">
+                    <option value="1">Nowy załamek EKG</option>
+                    <option value="2">Jakikolwiek załamek EKG</option>
+                    <option value="3">Nowy wzrost odcinka ST</option>
+                    <option value="4">Jakikolwiek wzrost odcinka ST</option>
+                    <option value="5">Nowy spadek odcinka ST</option>
+                    <option value="6">Jakikolwiek spadek odcinka ST</option>
+                    <option value="7">Nowa inwersja załamka T</option>
+                    <option value="8">Jakakolwiek inwersja załamka T</option>
+                    <option value="9">Nowy błąd przewodnictwa ???</option>
+                    <option value="10">Jakikolwiek błąd przewodnictwa ???</option>
+                </select>
+                <span asp-validation-for="Input.EcgExamination" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default">Zbadaj objawy</button>
+            <ul>
+                <form><button asp-area="" asp-controller="Home" asp-action="LoadAIData">Trenuj</button></form>
+                <h2>@loading.loadingStatus</h2>
+            </ul>
         </form>
     </div>
 </div>
