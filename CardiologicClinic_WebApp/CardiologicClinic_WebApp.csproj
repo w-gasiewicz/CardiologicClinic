@@ -23,6 +23,8 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="IMG\" />
+    <Folder Include="Views\User\" />
+    <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
   <ItemGroup>
