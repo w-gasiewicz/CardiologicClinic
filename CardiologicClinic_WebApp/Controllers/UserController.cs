@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using CardiologicClinic_WebApp.Data;
+using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,19 @@ namespace CardiologicClinic_WebApp.Controllers
         private string _connectionString;//= @"Server=(localdb)\\mssqllocaldb;Database=CardioDB;AttachDBFileName=C:\\Users\\FUJITSU\\CardioDB.mdf;Trusted_Connection=True;MultipleActiveResultSets=true";
         DbContextOptionsBuilder<ApplicationDbContext> _optionsBuilder;
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View();
+            var studentList = new List<User>{
+
+                        };
+            // Get the students from the database in the real application
+
+            return View(studentList);
         }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
         public string GetConnectionString()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()

@@ -8,6 +8,7 @@ using CardiologicClinic_WebApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using CardiologicClinic_WebApp.Models;
 
 namespace CardiologicClinic_WebApp
 {
@@ -35,6 +36,9 @@ namespace CardiologicClinic_WebApp
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddIdentityCore<User>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
