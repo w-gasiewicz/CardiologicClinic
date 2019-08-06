@@ -1,25 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
-using System.Security.Claims;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CardiologicClinic_WebApp.Models
 {
-    public class User : IdentityUser
+    public class User
     {
-        public  User()
-        {
-
-        }
-        public List<User> GetUsersList(ClaimsPrincipal user)
-        {
-            var studentList = new List<User>
-            {
-                            new User() { Id = "test", UserName = "John TEST" }
-
-            };
-            return studentList;
-
-        }
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
         public string UserRole { get; set; }
     }
 }

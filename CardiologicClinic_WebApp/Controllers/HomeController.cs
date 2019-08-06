@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CardiologicClinic_WebApp.Models;
-using CardiologicClinic_WebApp.AI.Procedures;
 using CardiologicClinic_WebApp.AI;
 
 namespace CardiologicClinic_WebApp.Controllers

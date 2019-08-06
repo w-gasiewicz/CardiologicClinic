@@ -9,10 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="DHTMLX.Scheduler.NET" Version="4.0.1" />
     <PackageReference Include="DHTMLX.Scheduler.NET.Responsive" Version="1.0.2" />
     <PackageReference Include="Google.Apis" Version="1.40.2" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.40.2.1643" />
+    <PackageReference Include="MailKit" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.ML" Version="1.2.0" />
@@ -21,7 +23,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
     <Folder Include="IMG\" />
     <Folder Include="Views\User\" />
     <Folder Include="wwwroot\files\" />

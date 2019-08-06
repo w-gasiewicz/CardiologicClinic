@@ -4,37 +4,44 @@
 @{
     ViewData["Title"] = "Zarządzanie użytkownikami";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Models.User user = new Models.User();
-    var ListOfUsers = user.GetUsersList(this.User);
+    CardiologicClinic_WebApp.Areas.Identity.Services.UserService us = new CardiologicClinic_WebApp.Areas.Identity.Services.UserService();
+    var ListOfUsers = us.GetListOfUsersAsync().Result;
 }
 
 <h2>Zarządzanie użytkownikami</h2>
 
 <p>
-    <a asp-action="Create">Stwórz nowego użytkownika</a>
+    <a asp-page="./CreateUser">Stwórz nowego użytkownika</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>Id</th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                Email
             </th>
-            <th></th>
+            <th>Rola</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in ListOfUsers)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserRole)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

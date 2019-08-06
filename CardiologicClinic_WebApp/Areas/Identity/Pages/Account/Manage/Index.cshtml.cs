@@ -27,6 +27,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
             _emailSender = emailSender;
         }
 
+        [Display(Name = "Nazwa użytkownika")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

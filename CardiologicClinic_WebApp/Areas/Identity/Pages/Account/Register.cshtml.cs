@@ -2,7 +2,6 @@
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -54,9 +53,6 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             [Display(Name = "Potwierdź hasło")]
             [Compare("Password", ErrorMessage = "Wprowadzone hasła różnią się od siebie.")]
             public string ConfirmPassword { get; set; }
-
-            //[Required]
-            //public string UserRole { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -74,7 +70,6 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    //result = await _userManager.AddToRoleAsync(user,Input.UserType);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",

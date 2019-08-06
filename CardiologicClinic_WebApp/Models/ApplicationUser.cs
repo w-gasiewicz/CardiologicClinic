@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 namespace CardiologicClinic_WebApp.Controllers
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser<int>
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         public string UserRole { get; set; }
