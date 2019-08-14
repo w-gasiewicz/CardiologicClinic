@@ -12,7 +12,7 @@
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
     @if (/*User.Identity.IsAuthenticated*/ role.GetUserRole(this.User/*.Identity.Name*/) == "Admin")
     {
-        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./UserView">Zarządzaj użytkownikami</a></li>
+        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-controller="Users" asp-action="Index">Zarządzaj użytkownikami</a></li>
     }
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./ToDownload">Do pobrania</a></li>
 </ul>

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using CardiologicClinic_WebApp.Areas.Identity.Services;
 using CardiologicClinic_WebApp.Data;
-using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +18,7 @@ namespace CardiologicClinic_WebApp.Controllers
         public ActionResult Index()
         {
             UserService us = new UserService(_context);
-           var ListOfUsers = us.GetListOfUsersAsync();
+            var ListOfUsers = us.GetListOfUsersAsync();
             return View(ListOfUsers);
         }
 
@@ -41,10 +39,10 @@ namespace CardiologicClinic_WebApp.Controllers
             _optionsBuilder.UseSqlServer(_connectionString);
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
             {
-                var role = _context.Users.FromSql($"SELECT * From AspNetUsers Where UserName = {user.Identity.Name}").FirstOrDefault();
-                return role.ToString();
+                string role = _context.Users.FromSql($"SELECT UserRole From AspNetUsers Where UserName = {user.Identity.Name}").FirstOrDefault().ToString();
+                return role/*.ToString()*/;
             }
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }
