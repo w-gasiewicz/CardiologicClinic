@@ -106,15 +106,18 @@ namespace CardiologicClinic_WebApp.Controllers
             {
                 try
                 {
-                    _context.Attach(user);
+                    var orgUser = await _context.ApplicationUser.FindAsync(id);
+                    //_context.Attach(user);
                     if (user.Name != String.Empty)
-                        _context.Entry(user).Property("Name").IsModified = true;
+                        orgUser.Name = user.Name;//_context.Entry(user).Property("Name").IsModified = true;
                     if (user.UserSurname != String.Empty)
-                        _context.Entry(user).Property("UserSurname").IsModified = true;
+                        orgUser.UserSurname = user.UserSurname;//_context.Entry(user).Property("UserSurname").IsModified = true;
                     if (user.Email != String.Empty)
-                        _context.Entry(user).Property("Email").IsModified = true;
+                        orgUser.Email = user.Email;//_context.Entry(user).Property("Email").IsModified = true;
                     if (user.PhoneNumber != String.Empty)
-                        _context.Entry(user).Property("PhoneNumber").IsModified = true;
+                        orgUser.PhoneNumber = user.PhoneNumber;//_context.Entry(user).Property("PhoneNumber").IsModified = true;
+
+                    _context.Entry(orgUser).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
