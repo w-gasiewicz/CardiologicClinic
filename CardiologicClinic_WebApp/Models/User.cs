@@ -7,7 +7,7 @@ namespace CardiologicClinic_WebApp.Models
     {
         public string Id { get; set; }
         [Display(Name = "Imię użytkownika")]
-        public string UserName { get; set; }
+        public string Name { get; set; }
         [Display(Name = "Nazwisko użytkownika")]
         public string UserSurname { get; set; }
         [EmailAddress]

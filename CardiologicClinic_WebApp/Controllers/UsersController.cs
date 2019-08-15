@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
@@ -22,7 +21,7 @@ namespace CardiologicClinic_WebApp.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            return View(await _context.ApplicationUser.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -33,7 +32,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _context.ApplicationUser
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -54,7 +53,7 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,UserSurname,Email,UserRole,Password,PhoneNumber")] User user)
+        public async Task<IActionResult> Create([Bind("UserName,UserSurname,Email,Password,PhoneNumber")] ApplicationUser user)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +72,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.ApplicationUser.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -86,7 +85,7 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,UserSurname,Email,UserRole,Password,PhoneNumber")] User user)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,UserSurname,Email,PhoneNumber")] ApplicationUser user)
         {
             if (id != user.Id)
             {
@@ -97,7 +96,7 @@ namespace CardiologicClinic_WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Attach(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -124,7 +123,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _context.ApplicationUser
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -139,15 +138,15 @@ namespace CardiologicClinic_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
+            var user = await _context.ApplicationUser.FindAsync(id);
+            _context.ApplicationUser.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(string id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.ApplicationUser.Any(e => e.Id == id);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace CardiologicClinic_WebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //CreateRoles(services).Wait();
+            CreateRoles(services).Wait();
         }
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {  
@@ -86,7 +86,7 @@ namespace CardiologicClinic_WebApp
                 }
             }
 
-            ApplicationUser user = await UserManager.FindByEmailAsync("kinia.kleszcz@gmail.com");
+            ApplicationUser user = await UserManager.FindByEmailAsync("g.wojciech@gmail.com");
 
             //if (user == null)
             //{

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -52,8 +53,8 @@ namespace CardiologicClinic_WebApp.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-        private UserManager<IdentityUser> _userManager;
-        public void CompetitionsController(UserManager<IdentityUser> userManager)
+        private UserManager<ApplicationUser> _userManager;
+        public void CompetitionsController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             var user = _userManager.GetUserAsync(HttpContext.User);

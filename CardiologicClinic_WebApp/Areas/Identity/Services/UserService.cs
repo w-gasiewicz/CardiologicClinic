@@ -22,7 +22,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
         });
         private static MapperConfiguration config2 = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<User, IdentityUser>();
+            cfg.CreateMap<User, ApplicationUser>();
         });
         private IMapper _mapper = config.CreateMapper();
         private IMapper _mapper2 = config.CreateMapper();
@@ -57,7 +57,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 return toReturn;
             }
         }
-        public async System.Threading.Tasks.Task<List<string>> AssignRolesAsync(UserManager<IdentityUser> _um)
+        public async System.Threading.Tasks.Task<List<string>> AssignRolesAsync(UserManager<ApplicationUser> _um)
         {
             //var users2 = _mapper2.Map<List<User>, List<IdentityUser>>(users);
             // int i = 0;
@@ -78,7 +78,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 var users = await _context.Users.ToListAsync();
                 foreach (var user in users)
                 {
-                    var role = await _um.GetRolesAsync(user);
+                    var role = await _um.GetRolesAsync((ApplicationUser)user);
                     var array = new List<string>(role).ToArray();
                     roles.Add(array[0]);
                 }

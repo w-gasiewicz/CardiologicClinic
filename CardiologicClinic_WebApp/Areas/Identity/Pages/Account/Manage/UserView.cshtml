@@ -1,6 +1,7 @@
 ﻿@page
 @model CardiologicClinic_WebApp.Models.User
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<ApplicationUser> UserManager
+@using CardiologicClinic_WebApp.Models;
 @{
     ViewData["Title"] = "Zarządzanie użytkownikami";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +20,7 @@
     <div class="form-actions no-color">
         <p>
             Wyszukaj użytkownika po imieniu: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input asp-controller="Users" asp-action="Index" method="get" type="submit" value="Szukaj" class="btn btn-default" /> |
+            <input asp-controller="Users" @*asp-action="Index"*@ method="get" type="submit" value="Szukaj" class="btn btn-default" /> |
             <a asp-page="./UserView">Wróć do pełnej listy użytkowników</a>
         </p>
     </div>
@@ -29,6 +30,8 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Imię użytkownika</th>
+            <th>Nazwisko użytkownika</th>
             <th>
                 Email
             </th>
@@ -38,22 +41,28 @@
     <tbody>
         @foreach (var item in ListOfUsers)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => ListOfRoles[i])
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                    <a asp-controller="Users" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                    <a asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserSurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ListOfRoles[i])
+            </td>
+            <td>
+                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                <a asp-controller="Users" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
             i++;
         }
     </tbody>

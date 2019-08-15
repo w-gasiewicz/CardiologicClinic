@@ -1,4 +1,4 @@
-﻿@model CardiologicClinic_WebApp.Models.User
+﻿@model CardiologicClinic_WebApp.Models.ApplicationUser
 
 @{
     ViewData["Title"] = "Szczegóły";
@@ -11,10 +11,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.UserSurname)
@@ -28,14 +28,14 @@
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.UserRole)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.UserRole)
-        </dd>
+        </dd>*@
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            Numer telefonu@* @Html.DisplayNameFor(model => model.PhoneNumber)*@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.PhoneNumber)
@@ -44,5 +44,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edytuj użytkownika</a> |
-    <a asp-action="Index">Powrót do listy użytkowników</a>
+    <a  href='javascript:history.go(-1)'>Powrót do listy użytkowników</a>
 </div>

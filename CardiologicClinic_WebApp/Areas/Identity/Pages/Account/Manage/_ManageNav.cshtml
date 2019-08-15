@@ -1,5 +1,6 @@
-﻿@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using CardiologicClinic_WebApp.Models;
 @using CardiologicClinic_WebApp.Controllers;
 @{
     UserCntroller role = new UserCntroller();
@@ -11,9 +12,9 @@
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Dane osobowe</a></li>
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./AppointmentCalendar">Kalendarz wizyt</a></li>
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
-    @if (UserManager.IsInRoleAsync(user,"Admin").Result)
+    @if (UserManager.IsInRoleAsync(user, "Admin").Result)
     {
-        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./UserView" @*asp-controller="Users" asp-action="Index" *@>Zarządzaj użytkownikami</a></li>
+        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./UserView">Zarządzaj użytkownikami</a></li>
     }
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./ToDownload">Do pobrania</a></li>
 </ul>
