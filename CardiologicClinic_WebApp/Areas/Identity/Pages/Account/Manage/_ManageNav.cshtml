@@ -1,8 +1,9 @@
 ﻿@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @using CardiologicClinic_WebApp.Controllers;
-@using System.Security.Claims;
 @{
-    UserController role = new UserController();
+    UserCntroller role = new UserCntroller();
+    var user = await UserManager.GetUserAsync(User);
 }
 <ul class="nav nav-pills nav-stacked">
     <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index">Profil</a></li>
@@ -10,9 +11,9 @@
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Dane osobowe</a></li>
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./AppointmentCalendar">Kalendarz wizyt</a></li>
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
-    @if (/*User.Identity.IsAuthenticated*/ role.GetUserRole(this.User/*.Identity.Name*/) == "Admin")
+    @if (UserManager.IsInRoleAsync(user,"Admin").Result)
     {
-        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-controller="Users" asp-action="Index">Zarządzaj użytkownikami</a></li>
+        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./UserView" @*asp-controller="Users" asp-action="Index" *@>Zarządzaj użytkownikami</a></li>
     }
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./ToDownload">Do pobrania</a></li>
 </ul>

@@ -20,7 +20,12 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
         {
             cfg.CreateMap<IdentityUser, User>();
         });
+        private static MapperConfiguration config2 = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<User, IdentityUser>();
+        });
         private IMapper _mapper = config.CreateMapper();
+        private IMapper _mapper2 = config.CreateMapper();
 
         public UserService()
         {
@@ -41,7 +46,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
         }
 
         public async System.Threading.Tasks.Task<List<User>> GetListOfUsersAsync()
-        { _connectionString = GetConnectionString();
+        {
+            _connectionString = GetConnectionString();
             _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             _optionsBuilder.UseSqlServer(_connectionString);
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
@@ -50,6 +56,34 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 var toReturn = _mapper.Map<List<IdentityUser>, List<User>>(users);
                 return toReturn;
             }
+        }
+        public async System.Threading.Tasks.Task<List<string>> AssignRolesAsync(UserManager<IdentityUser> _um)
+        {
+            //var users2 = _mapper2.Map<List<User>, List<IdentityUser>>(users);
+            // int i = 0;
+            // foreach (var user in users2)
+            // {
+
+            //     var role = await _um.GetRolesAsync(user);
+            //     var array = new List<string>(role).ToArray();
+            //     users[i].UserRole = array[0];
+            //     i++;
+            // }
+            List<string> roles = new List<string>();
+            _connectionString = GetConnectionString();
+            _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            _optionsBuilder.UseSqlServer(_connectionString);
+            using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
+            {
+                var users = await _context.Users.ToListAsync();
+                foreach (var user in users)
+                {
+                    var role = await _um.GetRolesAsync(user);
+                    var array = new List<string>(role).ToArray();
+                    roles.Add(array[0]);
+                }
+            }
+            return roles;
         }
     }
 }

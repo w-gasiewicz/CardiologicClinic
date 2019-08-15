@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace CardiologicClinic_WebApp.Controllers
+namespace CardiologicClinic_WebApp.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        public string UserRole { get; set; }
+        [Display(Name = "Imię użytkownika")]
+        public string Name { get; set; }
+        [Display(Name = "Nazwisko użytkownika")]
+        public string UserSurname { get; set; }
     }
 }

@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace CardiologicClinic_WebApp.Models
 {
     public class User
     {
-        [Required]
         public string Id { get; set; }
-        [Required]
         [Display(Name = "Imię użytkownika")]
         public string UserName { get; set; }
-        [Required]
         [Display(Name = "Nazwisko użytkownika")]
         public string UserSurname { get; set; }
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
         [Required]
@@ -20,7 +17,9 @@ namespace CardiologicClinic_WebApp.Models
         public string UserRole { get; set; }
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
+        [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
     }
 }

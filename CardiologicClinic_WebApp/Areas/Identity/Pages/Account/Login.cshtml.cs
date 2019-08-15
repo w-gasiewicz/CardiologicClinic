@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using CardiologicClinic_WebApp.Models;
 
 namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
 {

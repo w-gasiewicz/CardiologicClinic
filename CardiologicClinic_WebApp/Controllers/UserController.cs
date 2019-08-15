@@ -1,20 +1,24 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using CardiologicClinic_WebApp.Areas.Identity.Services;
 using CardiologicClinic_WebApp.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
-    public class UserController : Controller
+    public class UserCntroller : Controller
     {
         private string _connectionString;
         private readonly ApplicationDbContext _context;
         DbContextOptionsBuilder<ApplicationDbContext> _optionsBuilder;
-
+       
         public ActionResult Index()
         {
             UserService us = new UserService(_context);
@@ -30,19 +34,6 @@ namespace CardiologicClinic_WebApp.Controllers
 
             IConfiguration Configuration = builder.Build();
             return Configuration["ConnectionStrings:DefaultConnection"];
-        }
-        public string GetUserRole(ClaimsPrincipal user)
-        {
-            return "Admin";
-            _connectionString = GetConnectionString();
-            _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            _optionsBuilder.UseSqlServer(_connectionString);
-            using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
-            {
-                string role = _context.Users.FromSql($"SELECT UserRole From AspNetUsers Where UserName = {user.Identity.Name}").FirstOrDefault().ToString();
-                return role/*.ToString()*/;
-            }
-            // var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }

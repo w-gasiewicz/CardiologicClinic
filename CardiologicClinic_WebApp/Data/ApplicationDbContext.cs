@@ -11,6 +11,7 @@ namespace CardiologicClinic_WebApp.Data
          {
          }
         public DbSet<User> User { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Visit> Visit { get; set; }
     }
    

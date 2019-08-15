@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using CardiologicClinic_WebApp.Models;
+using System.Threading.Tasks;
 
 namespace CardiologicClinic_WebApp
 {
@@ -33,7 +34,9 @@ namespace CardiologicClinic_WebApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>().AddRoleManager<RoleManager<IdentityRole>>()
+                .AddDefaultUI()
+            .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -65,6 +68,36 @@ namespace CardiologicClinic_WebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            //CreateRoles(services).Wait();
+        }
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {  
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            string[] roleNames = { "Admin", "User", "Doctor","Recepcion" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                { 
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            ApplicationUser user = await UserManager.FindByEmailAsync("kinia.kleszcz@gmail.com");
+
+            //if (user == null)
+            //{
+            //    user = new IdentityUser()
+            //    {
+            //        UserName = "test2@gmail.com",
+            //        Email = "test2@gmail.com",
+            //    };
+            //    await UserManager.CreateAsync(user, "Test@123456");
+            //}
+            await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
-}
+    }

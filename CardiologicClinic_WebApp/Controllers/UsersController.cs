@@ -54,7 +54,7 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,UserSurname,Email,UserRole,Password,PhoneNumber")] User user)
+        public async Task<IActionResult> Create([Bind("UserName,UserSurname,Email,UserRole,Password,PhoneNumber")] User user)
         {
             if (ModelState.IsValid)
             {

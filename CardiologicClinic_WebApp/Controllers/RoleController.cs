@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +64,15 @@ namespace CardiologicClinic_WebApp.Controllers
             // var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ViewBag.IsTestUser = User.FindFirst(ClaimTypes.Name).Value == "Admin";
             //return User.FindFirst(ClaimTypes.Name).Value;
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<bool> GetAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var user = await _userManager.FindByIdAsync(userId);
+            var role = await _userManager.IsInRoleAsync(user, "Admin");// GetRoleAsync(user);
+            return role;
         }
     }
 }
