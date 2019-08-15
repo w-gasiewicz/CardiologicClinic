@@ -1,5 +1,5 @@
 ﻿@page
-@model CardiologicClinic_WebApp.Models.User
+@model CardiologicClinic_WebApp.Models.ApplicationUser
 @inject UserManager<ApplicationUser> UserManager
 @using CardiologicClinic_WebApp.Models;
 @{
@@ -19,8 +19,8 @@
 <form>
     <div class="form-actions no-color">
         <p>
-            Wyszukaj użytkownika po imieniu: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input asp-controller="Users" @*asp-action="Index"*@ method="get" type="submit" value="Szukaj" class="btn btn-default" /> |
+            Wyszukaj użytkownika po emailu: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input asp-controller="Users" asp-action="Search" method="get" type="submit" value="Szukaj" class="btn btn-default" /> |
             <a asp-page="./UserView">Wróć do pełnej listy użytkowników</a>
         </p>
     </div>
@@ -30,8 +30,8 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Imię użytkownika</th>
-            <th>Nazwisko użytkownika</th>
+            @*<th>Imię użytkownika</th>
+            <th>Nazwisko użytkownika</th>*@
             <th>
                 Email
             </th>
@@ -45,12 +45,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserSurname)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>

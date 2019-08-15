@@ -18,7 +18,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
         private readonly ApplicationDbContext _context;
         private static MapperConfiguration config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<IdentityUser, User>();
+            cfg.CreateMap<IdentityUser, ApplicationUser>();
         });
         private static MapperConfiguration config2 = new MapperConfiguration(cfg =>
         {
@@ -45,7 +45,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             return Configuration["ConnectionStrings:DefaultConnection"];
         }
 
-        public async System.Threading.Tasks.Task<List<User>> GetListOfUsersAsync()
+        public async System.Threading.Tasks.Task<List<ApplicationUser>> GetListOfUsersAsync()
         {
             _connectionString = GetConnectionString();
             _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -53,7 +53,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
             {
                 var users = await _context.Users.ToListAsync();
-                var toReturn = _mapper.Map<List<IdentityUser>, List<User>>(users);
+                var toReturn = _mapper.Map<List<IdentityUser>, List<ApplicationUser>>(users);
                 return toReturn;
             }
         }
