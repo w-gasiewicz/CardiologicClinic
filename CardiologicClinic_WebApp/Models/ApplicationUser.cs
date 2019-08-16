@@ -9,5 +9,8 @@ namespace CardiologicClinic_WebApp.Models
         public string Name { get; set; }
         [Display(Name = "Nazwisko użytkownika")]
         public string UserSurname { get; set; }
+        [Display(Name = "Hasło")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     }
 }

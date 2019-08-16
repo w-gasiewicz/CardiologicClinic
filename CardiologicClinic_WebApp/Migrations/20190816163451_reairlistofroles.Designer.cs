@@ -4,14 +4,16 @@ using CardiologicClinic_WebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CardiologicClinic_WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190816163451_reairlistofroles")]
+    partial class reairlistofroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,8 +238,6 @@ namespace CardiologicClinic_WebApp.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Password");
 
                     b.Property<string>("UserSurname");
 

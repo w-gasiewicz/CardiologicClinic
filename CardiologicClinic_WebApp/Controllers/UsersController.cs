@@ -6,16 +6,19 @@ using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<List<ApplicationUser>> Search(string sortOrder, string searchString)
         {
@@ -67,7 +70,9 @@ namespace CardiologicClinic_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                var userNew = new ApplicationUser { UserName = user.Email, Email = user.Email, Name = user.Name, PhoneNumber = user.PhoneNumber };
+                var result = await _userManager.CreateAsync(userNew, user.Password);
+                await _userManager.AddToRoleAsync(userNew, "User");
                 await _context.SaveChangesAsync();
                 return Redirect("/Identity/Account/Manage/UserView");
             }
@@ -109,13 +114,13 @@ namespace CardiologicClinic_WebApp.Controllers
                     var orgUser = await _context.ApplicationUser.FindAsync(id);
                     //_context.Attach(user);
                     if (user.Name != String.Empty)
-                        orgUser.Name = user.Name;//_context.Entry(user).Property("Name").IsModified = true;
+                        orgUser.Name = user.Name;
                     if (user.UserSurname != String.Empty)
-                        orgUser.UserSurname = user.UserSurname;//_context.Entry(user).Property("UserSurname").IsModified = true;
+                        orgUser.UserSurname = user.UserSurname;
                     if (user.Email != String.Empty)
-                        orgUser.Email = user.Email;//_context.Entry(user).Property("Email").IsModified = true;
+                        orgUser.Email = user.Email;
                     if (user.PhoneNumber != String.Empty)
-                        orgUser.PhoneNumber = user.PhoneNumber;//_context.Entry(user).Property("PhoneNumber").IsModified = true;
+                        orgUser.PhoneNumber = user.PhoneNumber;
 
                     _context.Entry(orgUser).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
