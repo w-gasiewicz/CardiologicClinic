@@ -38,6 +38,11 @@ namespace CardiologicClinic_WebApp.Controllers
             return View();
         }
 
+        public IActionResult Timeline()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

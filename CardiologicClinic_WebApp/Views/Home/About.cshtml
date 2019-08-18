@@ -1,15 +1,137 @@
 ﻿@{
     ViewData["Title"] = "Opis przychodni";
 }
+<head>
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+</head>
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
 <p>Tutaj będą dodatkowe informacje.</p>
 <p>Przychodnia oferuje pomoc lekarską w zakresie kardiologicznym.</p>
 
-<h2>HISTORIA KLINIKI COS ZROBIC LADNIEGO</h2>
+<h2>Historia kliniki</h2>
+<style>
+    .history {
+        background-color: #A6A4A3;
+    }
 
-<h2>KONIEC HISTORIII</h2>
+    /* The actual timeline (the vertical ruler) */
+    .timelineT {
+        margin-top: 40px;
+        position: relative;
+        max-width: 1200px;
+    }
+
+        /* The actual timeline (the vertical ruler) */
+        .timelineT::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: white;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+        }
+
+    /* Container around content */
+    .containerT {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 80%;
+    }
+
+        /* The circles on the timeline */
+        .containerT::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #FF9F55;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+    /* Place the container to the left */
+    .leftT {
+        right: 30.1%;
+    }
+
+    /* Place the container to the right */
+    .rightT {
+        left: 50.6%;
+    }
+        /* Fix the circle for containers on the right side */
+        .rightT::after {
+            left: -16px;
+        }
+
+    /* The actual content */
+    .contentT {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        font-size: 12px;
+        max-width: 450px;
+        margin-left: 410px;
+    }
+    /* The actual content */
+    .contentTR {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        font-size: 12px;
+        max-width: 450px;
+    }
+    }
+</style>
+<div class="history">
+    <div class="timelineT">
+        <div class="containerT leftT">
+            <div class="contentT">
+                <h2>2017</h2>
+                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            </div>
+        </div>
+        <div class="containerT rightT">
+            <div class="contentTR">
+                <h2>2016</h2>
+                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            </div>
+        </div>
+        <div class="containerT leftT">
+            <div class="contentT">
+                <h2>2015</h2>
+                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            </div>
+        </div>
+        <div class="containerT rightT">
+            <div class="contentTR">
+                <h2>2012</h2>
+                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            </div>
+        </div>
+        <div class="containerT leftT">
+            <div class="contentT">
+                <h2>2011</h2>
+                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            </div>
+        </div>
+        <div class="containerT rightT">
+            <div class="contentTR">
+                <h2>2007</h2>
+                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h2>Nasz zespół</h2>
 <div class="row">
     <div class="columnABOUT">
