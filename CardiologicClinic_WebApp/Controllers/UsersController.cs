@@ -66,13 +66,13 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,UserSurname,Email,Password,PhoneNumber")] ApplicationUser user)
+        public async Task<IActionResult> Create([Bind("UserName,UserSurname,Email,Password,PhoneNumber,Role")] ApplicationUser user)
         {
             if (ModelState.IsValid)
             {
                 var userNew = new ApplicationUser { UserName = user.Email, Email = user.Email, Name = user.Name, PhoneNumber = user.PhoneNumber };
                 var result = await _userManager.CreateAsync(userNew, user.Password);
-                await _userManager.AddToRoleAsync(userNew, "User");
+                await _userManager.AddToRoleAsync(userNew, user.Role);
                 await _context.SaveChangesAsync();
                 return Redirect("/Identity/Account/Manage/UserView");
             }
@@ -100,7 +100,7 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,UserSurname,Email,PhoneNumber")] ApplicationUser user)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,UserSurname,Email,PhoneNumber,Role")] ApplicationUser user)
         {
             if (id != user.Id)
             {
@@ -112,7 +112,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 try
                 {
                     var orgUser = await _context.ApplicationUser.FindAsync(id);
-                    //_context.Attach(user);
+
                     if (user.Name != String.Empty)
                         orgUser.Name = user.Name;
                     if (user.UserSurname != String.Empty)
@@ -121,6 +121,13 @@ namespace CardiologicClinic_WebApp.Controllers
                         orgUser.Email = user.Email;
                     if (user.PhoneNumber != String.Empty)
                         orgUser.PhoneNumber = user.PhoneNumber;
+
+                    if (orgUser.Role != user.Role)
+                    {
+                        if (await _userManager.IsInRoleAsync(orgUser, user.Role))
+                            await _userManager.RemoveFromRoleAsync(orgUser, user.Role);
+                        await _userManager.AddToRoleAsync(orgUser, user.Role);
+                    }
 
                     _context.Entry(orgUser).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
