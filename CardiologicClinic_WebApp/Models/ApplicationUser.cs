@@ -12,5 +12,6 @@ namespace CardiologicClinic_WebApp.Models
         [Display(Name = "Hasło")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public string Role { get; set; }
     }
 }
