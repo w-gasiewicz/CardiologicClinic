@@ -57,6 +57,21 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 return toReturn;
             }
         }
+        public async System.Threading.Tasks.Task<List<ApplicationUser>> GetListOfDoctorsAsync()
+        {
+            _connectionString = GetConnectionString();
+            _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            _optionsBuilder.UseSqlServer(_connectionString);
+            using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
+            {
+                var users = await _context.ApplicationUser.ToListAsync();
+                //foreach(var user in users)
+                //{
+                //    if(user.)
+                //}
+                return users;
+            }
+        }
         public async System.Threading.Tasks.Task<List<string>> AssignRolesAsync(UserManager<ApplicationUser> _um)
         {
             //var users2 = _mapper2.Map<List<User>, List<IdentityUser>>(users);

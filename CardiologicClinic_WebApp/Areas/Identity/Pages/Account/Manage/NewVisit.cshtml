@@ -1,8 +1,13 @@
 ﻿@page
 @model NewVisitModel
+@inject UserManager<ApplicationUser> UserManager
+@using CardiologicClinic_WebApp.Models;
 @{
     ViewData["Title"] = "Nowa wizyta";
     ViewData["ActivePage"] = ManageNavPages.NewVisit;
+
+    CardiologicClinic_WebApp.Areas.Identity.Services.UserService us = new CardiologicClinic_WebApp.Areas.Identity.Services.UserService();
+    var ListOfUsers = us.GetListOfDoctorsAsync().Result;
 }
 <!DOCTYPE html>
 <html>
@@ -19,38 +24,24 @@
 <body>
     @*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*@
     <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarz 1<span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a> 
-            <ul class="dropdown-menu">
-                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
-                <li class="divider"></li>
-                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarzyk 2 <span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
-                <li class="divider"></li>
-                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarzyk 3 <span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
-                <li class="divider"></li>
-                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">Lekarzyk 4 <span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
-                <li class="divider"></li>
-                <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
-            </ul>
-        </li>
+        <h2>Dostępni lekarze:</h2>
+        @foreach (var item in ListOfUsers)
+        {@if (UserManager.IsInRoleAsync(item, "Doctor").Result)
+            {
+                var name = item.Name + " " + item.UserSurname + " ";
+        <center>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">@name<span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
+                </ul>
+            </li>
+            <br>
+        </center>
+            }
+    }
     </ul>
 </body>
 </html>
