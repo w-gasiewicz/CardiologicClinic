@@ -1,0 +1,47 @@
+﻿@model CardiologicClinic_WebApp.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Lekarz</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Imię lekarza
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+           Nazwisko lekarza
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserSurname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.UserRole)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserRole)
+        </dd>*@
+        <dt>
+            Numer telefonu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a  href='javascript:history.go(-1)'>Powrót</a>
+</div>

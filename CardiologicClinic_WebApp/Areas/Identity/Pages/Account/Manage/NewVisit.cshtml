@@ -35,7 +35,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
                     <li class="divider"></li>
-                    <li><a href="#" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
+                    <li><a  asp-controller="Users" asp-action="DoctorDetails" asp-route-id="@item.Id" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
                 </ul>
             </li>
             <br>
