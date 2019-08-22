@@ -45,6 +45,11 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             return Configuration["ConnectionStrings:DefaultConnection"];
         }
 
+        public void AddEvent()
+        {
+
+        }
+
         public async System.Threading.Tasks.Task<List<ApplicationUser>> GetListOfUsersAsync()
         {
             _connectionString = GetConnectionString();

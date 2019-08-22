@@ -16,6 +16,8 @@ namespace CardiologicClinic_WebApp.Models
         public string IdDoctor { get; set; }
         [Required]
         public DateTime VisitDate { get; set; }
+        [Required]
+        public string VisitName { get; set; }
 
     }
 }
