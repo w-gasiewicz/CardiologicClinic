@@ -97,7 +97,8 @@ namespace CardiologicClinic_WebApp
             //    };
             //    await UserManager.CreateAsync(user, "Test@123456");
             //}
-            await UserManager.AddToRoleAsync(user, "Admin");
+            //await UserManager.AddToRoleAsync(user, "Admin");
+            await UserManager.RemoveFromRoleAsync(user, "User");
         }
     }
     }
