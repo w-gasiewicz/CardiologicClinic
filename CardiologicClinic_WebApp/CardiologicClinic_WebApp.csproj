@@ -27,6 +27,12 @@
     <Folder Include="IMG\" />
     <Folder Include="wwwroot\files\" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="HearAttackRecognition_ML">
+      <HintPath>AI\HearAttackRecognition_ML.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
   <ItemGroup>
     <Content Update="Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml">
