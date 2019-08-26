@@ -1,10 +1,8 @@
-﻿@model HeartDataInputModel
+﻿@model HeartAttackModel
 @{
     ViewData["Title"] = "Moduł wykrywający zawał serca";
-    LoadFiles loading = new LoadFiles();
-    HeartDataInputModel model = new HeartDataInputModel();
 }
-@using CardiologicClinic_WebApp.AI.Procedures;
+@using CardiologicClinic_WebApp.Views.Home;
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
@@ -15,9 +13,10 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form asp-route-returnUrl="@Model" method="post">
+        <form method="post">
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+            <h3>Informacje podstawowe:</h3>
             <div class="form-group">
                 <label asp-for="Input.Age"></label>
                 <input asp-for="Input.Age" class="form-control" />
@@ -97,7 +96,9 @@
                     <option value="6">Powyżej 12 godzin</option>
                 </select>
                 <span asp-validation-for="Input.DurationOfTheLastEpisode" class="text-danger"></span>
-            </div><div class="form-group">
+            </div>
+            <h3>Objawy współwystępujące:</h3>
+            <div class="form-group">
                 <label asp-for="Input.Nausea"></label>
                 <select asp-for="Input.Nausea">
                     <option value="1">Tak</option>
@@ -152,85 +153,327 @@
                 </select>
                 <span asp-validation-for="Input.PalliativeFactors" class="text-danger"></span>
             </div>
+            <h3>Występowanie podobnych bóli w przeszłości:</h3>
             <div class="form-group">
-                <label asp-for="Input.HistoryOfSimilarPain"></label>
-                <select asp-for="Input.HistoryOfSimilarPain">
-                    <option value="1">Występowanie podobnych bóli w przeszłości</option>
-                    <option value="2">Konsultacja z lekarzem z powodu poprzednich bóli</option>
-                    <option value="3">Wcześniejszy ból związany z sercem</option>
-                    <option value="4">Wcześniejszy ból związany z zawałem serca</option>
-                    <option value="5">Wcześniejszy ból związany z chorobą niedokrwienną serca</option>
+                <label asp-for="Input.PriorChestPainOfThisType"></label>
+                <select asp-for="Input.PriorChestPainOfThisType">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
                 </select>
-                <span asp-validation-for="Input.HistoryOfSimilarPain" class="text-danger"></span>
+                <span asp-validation-for="Input.PriorChestPainOfThisType" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PhysicianConsultedForPriorPain"></label>
+                <select asp-for="Input.PhysicianConsultedForPriorPain">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PhysicianConsultedForPriorPain" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PriorPainRelatedToHeart"></label>
+                <select asp-for="Input.PriorPainRelatedToHeart">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PriorPainRelatedToHeart" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PriorPainDueToMI"></label>
+                <select asp-for="Input.PriorPainDueToMI">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PriorPainDueToMI" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PriorPainDueToAnginaPectoris"></label>
+                <select asp-for="Input.PriorPainDueToAnginaPectoris">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PriorPainDueToAnginaPectoris" class="text-danger"></span>
             </div>
+            <h3>Historia choroby:</h3>
             <div class="form-group">
-                <label asp-for="Input.PastMedicalHistory"></label>
-                <select asp-for="Input.PastMedicalHistory">
-                    <option value="1">Zawał serca</option>
-                    <option value="2">Dławica piersiowa</option>
-                    <option value="3">Nietypowy ból w klatce piersiowej</option>
-                    <option value="4">Niewydolność serca</option>
-                    <option value="5">Choroby naczyń obwodowych</option>
-                    <option value="6">Przepuklina rozworu protytowego przepony</option>
-                    <option value="7">Nadciśnienie</option>
-                    <option value="8">Cukrzyca</option>
-                    <option value="9">Palacz</option>
+                <label asp-for="Input.PriorMI"></label>
+                <select asp-for="Input.PriorMI">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
                 </select>
-                <span asp-validation-for="Input.PastMedicalHistory" class="text-danger"></span>
+                <span asp-validation-for="Input.PriorMI" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PriorAnginaPectoris"></label>
+                <select asp-for="Input.PriorAnginaPectoris">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PriorAnginaPectoris" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PriorAntypicalChestPain"></label>
+                <select asp-for="Input.PriorAntypicalChestPain">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PriorAntypicalChestPain" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.CongestiveHeartFailure"></label>
+                <select asp-for="Input.CongestiveHeartFailure">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.CongestiveHeartFailure" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.PeripheralVascularFailure"></label>
+                <select asp-for="Input.PeripheralVascularFailure">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.PeripheralVascularFailure" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.HiatalHernia"></label>
+                <select asp-for="Input.HiatalHernia">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.HiatalHernia" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Hypertension"></label>
+                <select asp-for="Input.Hypertension">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Hypertension" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Diabetes"></label>
+                <select asp-for="Input.Diabetes">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Diabetes" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Smoker"></label>
+                <select asp-for="Input.Smoker">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Smoker" class="text-danger"></span>
             </div>
+            <h3>Aktualnie stosowane leki:</h3>
             <div class="form-group">
-                <label asp-for="Input.CurrentMedicationUsage"></label>
-                <select asp-for="Input.CurrentMedicationUsage">
-                    <option value="1">Leki moczopędne</option>
-                    <option value="2">Azotany</option>
-                    <option value="3">Beta bloker - lek na serce</option>
-                    <option value="4">Naparstnica</option>
-                    <option value="5">Niesterydowy przeciwzapalny</option>
-                    <option value="6">Związek zobojętniający kwasy</option>
+                <label asp-for="Input.Diuretics"></label>
+                <select asp-for="Input.Diuretics">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
                 </select>
-                <span asp-validation-for="Input.CurrentMedicationUsage" class="text-danger"></span>
+                <span asp-validation-for="Input.Diuretics" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Nitrates"></label>
+                <select asp-for="Input.Nitrates">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Nitrates" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.BetaBlockers"></label>
+                <select asp-for="Input.BetaBlockers">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.BetaBlockers" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Digitalis"></label>
+                <select asp-for="Input.Digitalis">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Digitalis" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Nonsteroidal"></label>
+                <select asp-for="Input.Nonsteroidal">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Nonsteroidal" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Antacids"></label>
+                <select asp-for="Input.Antacids">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Antacids" class="text-danger"></span>
             </div>
+            <h3>Badania lekarskie:</h3>
             <div class="form-group">
-                <label asp-for="Input.PhysicalExaminations"></label>
-                <select asp-for="Input.PhysicalExaminations">
-                    <option value="1">Skurczowe ciśnienie krwi</option>
-                    <option value="2">Rozkurczowe ciśnienie krwi</option>
-                    <option value="3">Tętno</option>
-                    <option value="4">Częstotliwość oddechów na minutę</option>
-                    <option value="5">Rzężenie</option>
-                    <option value="6">Sinica</option>
-                    <option value="7">Bladość</option>
-                    <option value="8">Szmer sercowy skurczowy</option>
-                    <option value="9">Szmer sercowy rozkurczowy</option>
-                    <option value="10">Obrzęk</option>
-                    <option value="11">?????????????</option>
-                    <option value="12">?????????????</option>
-                    <option value="13">Wrażliwość ścian klatki piersiowej</option>
-                    <option value="14">Diaforeza</option>
+                <label asp-for="Input.SystolicBloodPressure"></label>
+                <select asp-for="Input.SystolicBloodPressure">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
                 </select>
-                <span asp-validation-for="Input.PhysicalExaminations" class="text-danger"></span>
+                <span asp-validation-for="Input.SystolicBloodPressure" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.DiastolicBloodPressure"></label>
+                <select asp-for="Input.DiastolicBloodPressure">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.DiastolicBloodPressure" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.HeartRate"></label>
+                <input asp-for="Input.HeartRate" class="form-control" />
+                <span asp-validation-for="Input.HeartRate" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.RespirationRate"></label>
+                <input asp-for="Input.RespirationRate" class="form-control" />
+                <span asp-validation-for="Input.RespirationRate" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Rales"></label>
+                <select asp-for="Input.Rales">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Rales" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Cyanosis"></label>
+                <select asp-for="Input.Cyanosis">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Cyanosis" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Pallor"></label>
+                <select asp-for="Input.Pallor">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Pallor" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.SystolicMurmur"></label>
+                <select asp-for="Input.SystolicMurmur">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.SystolicMurmur" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.DiastolicMurmur"></label>
+                <select asp-for="Input.DiastolicMurmur">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.DiastolicMurmur" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.Oedema"></label>
+                <select asp-for="Input.Oedema">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.Oedema" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.S3Gallop"></label>
+                <select asp-for="Input.S3Gallop">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.S3Gallop" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.S4Gallop"></label>
+                <select asp-for="Input.S4Gallop">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.S4Gallop" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.ChestWallTenderness"></label>
+                <select asp-for="Input.ChestWallTenderness">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.ChestWallTenderness" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.DiaphoresisPE"></label>
+                <select asp-for="Input.DiaphoresisPE">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.DiaphoresisPE" class="text-danger"></span>
             </div>
+
+            <h3>Badania EKG:</h3>
             <div class="form-group">
-                <label asp-for="Input.EcgExamination"></label>
-                <select asp-for="Input.EcgExamination">
-                    <option value="1">Nowy załamek EKG</option>
-                    <option value="2">Jakikolwiek załamek EKG</option>
-                    <option value="3">Nowy wzrost odcinka ST</option>
-                    <option value="4">Jakikolwiek wzrost odcinka ST</option>
-                    <option value="5">Nowy spadek odcinka ST</option>
-                    <option value="6">Jakikolwiek spadek odcinka ST</option>
-                    <option value="7">Nowa inwersja załamka T</option>
-                    <option value="8">Jakakolwiek inwersja załamka T</option>
-                    <option value="9">Nowy błąd przewodnictwa ???</option>
-                    <option value="10">Jakikolwiek błąd przewodnictwa ???</option>
+                <label asp-for="Input.NewQWave"></label>
+                <select asp-for="Input.NewQWave">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
                 </select>
-                <span asp-validation-for="Input.EcgExamination" class="text-danger"></span>
+                <span asp-validation-for="Input.NewQWave" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.AnyQWave"></label>
+                <select asp-for="Input.AnyQWave">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.AnyQWave" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.NewSTSegmentElevation"></label>
+                <select asp-for="Input.NewSTSegmentElevation">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.NewSTSegmentElevation" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.AnySTSegmentElevation"></label>
+                <select asp-for="Input.AnySTSegmentElevation">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.AnySTSegmentElevation" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.NewSTSegmentDepression"></label>
+                <select asp-for="Input.NewSTSegmentDepression">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.NewSTSegmentDepression" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.AnySTSegmentDepression"></label>
+                <select asp-for="Input.AnySTSegmentDepression">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.AnySTSegmentDepression" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.NewTWaveInversion"></label>
+                <select asp-for="Input.NewTWaveInversion">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.NewTWaveInversion" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.AnyTWaveInversion"></label>
+                <select asp-for="Input.AnyTWaveInversion">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.AnyTWaveInversion" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.NewIntraventricularConductionDefect"></label>
+                <select asp-for="Input.NewIntraventricularConductionDefect">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.NewIntraventricularConductionDefect" class="text-danger"></span>
+            </div><div class="form-group">
+                <label asp-for="Input.AnyIntraventricularConductionDefect"></label>
+                <select asp-for="Input.AnyIntraventricularConductionDefect">
+                    <option value="1">Tak</option>
+                    <option value="0">Nie</option>
+                </select>
+                <span asp-validation-for="Input.AnyIntraventricularConductionDefect" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Zbadaj objawy</button>
+
+            <h3>Diagnoza:</h3>
             <ul>
-                <form><button asp-area="" asp-controller="Home" asp-action="LoadAIData">Trenuj</button></form>
-                <h2>@loading.loadingStatus</h2>
+                @*<form><button asp-route-returnUrl="@Model.Input" asp-action="LoadAIData">Trenuj</button></form>*@
+                @*<h2>@Model.result</h2>
+                <h2>@Model.isIll</h2>*@
             </ul>
+            <button type="submit" class="btn btn-default">Zbadaj objawy</button>
         </form>
-    </div>
+</div>
 </div>
