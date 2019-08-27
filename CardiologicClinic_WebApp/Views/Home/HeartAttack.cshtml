@@ -1,9 +1,9 @@
-﻿@model HeartAttackModel
+﻿@*@page*@
+@model HeartAttackModel
 @{
     ViewData["Title"] = "Moduł wykrywający zawał serca";
 }
 @using CardiologicClinic_WebApp.Views.Home;
-<h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
 <p>Tutaj będzie ai na atak serca.</p>
@@ -467,13 +467,14 @@
                 <span asp-validation-for="Input.AnyIntraventricularConductionDefect" class="text-danger"></span>
             </div>
 
+            <form><button asp-action="LoadAIData" class="btn btn-default">Zbadaj</button></form>
+
             <h3>Diagnoza:</h3>
             <ul>
-                @*<form><button asp-route-returnUrl="@Model.Input" asp-action="LoadAIData">Trenuj</button></form>*@
                 @*<h2>@Model.result</h2>
-                <h2>@Model.isIll</h2>*@
+            <h2>@Model.isIll</h2>*@
             </ul>
-            <button type="submit" class="btn btn-default">Zbadaj objawy</button>
+
         </form>
 </div>
 </div>
