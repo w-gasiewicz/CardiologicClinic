@@ -10,4 +10,3 @@ namespace CardiologicClinic_WebApp.AI.Models
         public bool IsGood { get; set; }
     }
 }
-

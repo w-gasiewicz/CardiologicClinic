@@ -1,4 +1,5 @@
 ﻿using Microsoft.ML.Data;
+
 namespace CardiologicClinic_WebApp.AI.Models
 {
     class FeedBackPrediction

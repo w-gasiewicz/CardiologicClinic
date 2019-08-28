@@ -1,0 +1,20 @@
+﻿@model HeartAttackModel
+@{
+    ViewData["Title"] = "Diagnoza";
+    HeartAttackModel.result = HeartAttackModel.result * 100;
+}
+@using CardiologicClinic_WebApp.Views.Home
+
+<h2>Diagnoza:</h2>
+<ul>
+    <h4>@HeartAttackModel.result.ToString() %</h4>
+    @if (HeartAttackModel.isIll)
+    {
+        <h4>Badany pacjent jest chory z podanym prawdopodobieństwem.</h4>
+    }
+    @if (!HeartAttackModel.isIll)
+    {
+        <h4>Badany pacjent nie jest chory z podanym prawdopodobieństwem.</h4>
+    }
+</ul>
+

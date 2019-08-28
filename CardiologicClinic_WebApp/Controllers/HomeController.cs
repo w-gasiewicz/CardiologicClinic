@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CardiologicClinic_WebApp.Models;
 using HearAttackRecognition_ML.Models;
 using CardiologicClinic_WebApp.Views.Home;
+//using CardiologicClinic_WebApp.AI.Models;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -58,7 +59,7 @@ namespace CardiologicClinic_WebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult LoadAIData(HeartAttackModel.InputModel Input)
+        public IActionResult Diagnosis(HeartAttackModel.InputModel Input)
         {
             int x = 0;
 
@@ -124,8 +125,8 @@ namespace CardiologicClinic_WebApp.Controllers
                 NewIntraventricularConductionDefect = Input.NewIntraventricularConductionDefect,
                 AnyIntraventricularConductionDefect = Input.AnyIntraventricularConductionDefect
             };
-            //RunAI.Run();
-            RunAI.Test();
+           // RunAI.Run();
+            RunAI.Test(userData);
             HeartAttackModel.result = RunAI.result;
             HeartAttackModel.isIll = RunAI.isIll;
 
