@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using CardiologicClinic_WebApp.Models;
 using HearAttackRecognition_ML.Models;
 using CardiologicClinic_WebApp.Views.Home;
-//using CardiologicClinic_WebApp.AI.Models;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -130,7 +129,7 @@ namespace CardiologicClinic_WebApp.Controllers
             HeartAttackModel.result = RunAI.result;
             HeartAttackModel.isIll = RunAI.isIll;
 
-            return View();//return Redirect("~/Home/HeartAttack"); //new RedirectToPageResult("/HeartAttack");
+            return View();
         }
     }
 }

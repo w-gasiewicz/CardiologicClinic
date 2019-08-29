@@ -20,7 +20,7 @@ namespace CardiologicClinic_WebApp.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public async Task<List<ApplicationUser>> Search(string sortOrder, string searchString)
+        public async Task<IActionResult/*List<ApplicationUser>*/> Search(string sortOrder, string searchString)
         {
             var users = from s in _context.ApplicationUser
                            select s;
@@ -29,14 +29,9 @@ namespace CardiologicClinic_WebApp.Controllers
                 users = users.Where(s => s.UserSurname.Contains(searchString)
                                        || s.Name.Contains(searchString));
             }
-            return await users.AsNoTracking().ToListAsync();
-        }
-            // GET: Users
-            public async Task<IActionResult> Index()
-        {
-            return View(await _context.ApplicationUser.ToListAsync());
-        }
 
+            return View (await users.AsNoTracking().ToListAsync());
+        }
         // GET: Users/Details/5
         public async Task<IActionResult> Details(string id)
         {

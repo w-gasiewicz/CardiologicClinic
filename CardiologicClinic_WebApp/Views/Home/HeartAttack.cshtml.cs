@@ -1,14 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using HearAttackRecognition_ML.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace CardiologicClinic_WebApp.Views.Home
 {
     [AllowAnonymous]
     public class HeartAttackModel : PageModel
     {
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 1;
+        public int Count { get; set; }
+        public int PageSize { get; set; } = 10;
+        public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
+
         public static float result;
         public static bool isIll;
 

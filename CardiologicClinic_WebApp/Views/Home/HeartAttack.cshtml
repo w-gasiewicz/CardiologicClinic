@@ -16,6 +16,7 @@
         <form method="post">
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+
             <h3>Informacje podstawowe:</h3>
             <div class="form-group">
                 <label asp-for="Input.Age"></label>
@@ -97,6 +98,7 @@
                 </select>
                 <span asp-validation-for="Input.DurationOfTheLastEpisode" class="text-danger"></span>
             </div>
+
             <h3>Objawy współwystępujące:</h3>
             <div class="form-group">
                 <label asp-for="Input.Nausea"></label>
