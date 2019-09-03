@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Claims;
 
 namespace CardiologicClinic_WebApp.Areas.Identity.Services
 {

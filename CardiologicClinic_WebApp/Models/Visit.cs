@@ -5,16 +5,17 @@ namespace CardiologicClinic_WebApp.Models
 {
     public class Visit
     {
-        [Required]
         public string Id { get; set; }
-        [Required]
+        [Display(Name = "Pacjent")]
         public string IdPatient { get; set; }
-        [Required]
+        [Display(Name = "Lekarz")]
         public string IdDoctor { get; set; }
-        [Required]
+        [Display(Name = "Data wizyty")]
         public DateTime VisitDate { get; set; }
-        [Required]
+        [Display(Name = "Nazwa wizyty")]
         public string VisitName { get; set; }
+        [Display(Name = "Cena")]
+        public float Price { get; set; }
 
     }
 }

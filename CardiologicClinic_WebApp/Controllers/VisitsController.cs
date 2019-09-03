@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
@@ -18,7 +15,7 @@ namespace CardiologicClinic_WebApp.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Visits
         public async Task<IActionResult> Index()
         {
@@ -53,14 +50,19 @@ namespace CardiologicClinic_WebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdPatient,IdDoctor,VisitDate,VisitName")] Visit visit)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,IdPatient,IdDoctor,VisitDate,VisitName,Price")] Visit visit)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(visit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                var x2 = 9;
             }
             return View(visit);
         }

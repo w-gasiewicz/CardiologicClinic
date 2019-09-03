@@ -1,12 +1,13 @@
 ﻿@model CardiologicClinic_WebApp.Models.Visit
-
+@using CardiologicClinic_WebApp.Areas.Identity.Services
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Utwórz nową wizytę";
+    VisitService vs = new VisitService();
+    vs.GetUsers();
 }
 
-<h2>Create</h2>
+<h2>Stwórz nową wizytę</h2>
 
-<h4>Visit</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,12 +15,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdPatient" class="control-label"></label>
-                <input asp-for="IdPatient" class="form-control" />
+                @*<input asp-for="IdPatient" class="form-control" />*@
+                <select  asp-for="IdPatient" asp-items="VisitService.Patients"></select>
                 <span asp-validation-for="IdPatient" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdDoctor" class="control-label"></label>
-                <input asp-for="IdDoctor" class="form-control" />
+                @*<input asp-for="IdDoctor" class="form-control" />*@
+                <select asp-for="IdDoctor" asp-items="VisitService.Doctors"></select>
                 <span asp-validation-for="IdDoctor" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,14 +36,19 @@
                 <span asp-validation-for="VisitName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Stwórz" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Powrót do listy wizyt</a>
 </div>
 
 @section Scripts {

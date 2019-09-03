@@ -1,10 +1,13 @@
 ﻿@page
 @model AppointmentCalendarModel
+@inject UserManager<ApplicationUser> UserManager
 @using  CardiologicClinic_WebApp.Models;
 @{
     ViewData["Title"] = "Kalendarz wizyt";
     ViewData["ActivePage"] = ManageNavPages.AppointmentCalendar;
-    var x = new Visit { Id = "id", IdPatient="id pacjent", IdDoctor="id lekarz", VisitDate=new DateTime(2019,8,23,2,0,0) , VisitName="tytul"};
+    //var x = new Visit { Id = "id", IdPatient="id pacjent", IdDoctor="id lekarz", VisitDate=new DateTime(2019,8,23,2,0,0) , VisitName="tytul"};
+    AppointmentCalendarModel acm = new AppointmentCalendarModel(UserManager);
+    var visits = Model.GetUsersVisitAsync().Result;
 }
 
 <h4>@ViewData["Title"]</h4>

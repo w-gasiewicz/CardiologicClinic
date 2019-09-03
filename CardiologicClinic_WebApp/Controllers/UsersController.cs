@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
-using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Identity;
 
