@@ -8,6 +8,7 @@
     //var x = new Visit { Id = "id", IdPatient="id pacjent", IdDoctor="id lekarz", VisitDate=new DateTime(2019,8,23,2,0,0) , VisitName="tytul"};
     AppointmentCalendarModel acm = new AppointmentCalendarModel(UserManager);
     var visits = Model.GetUsersVisitAsync().Result;
+    var schedulerEvents = Model.FillCalendar(visits);
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -66,11 +67,21 @@
             }
         }
         scheduler.init('scheduler_here', new Date(2019, 0, 20), "week");
-        scheduler.addEvent({
-            start_date: "22-08-2019 9:00",
+
+         @*@foreach (var item in visits) {
+             $scheduler.addEvent({
+                 start_date: item.VisitDate,
+            end_date: item.VisitDate,
+            text: item.Text
+             });
+         }*@
+        scheduler.load(@schedulerEvents);
+
+         scheduler.addEvent({
+             start_date: "22-08-2019 9:00",
             end_date: "22-08-2019 12:00",
             text: "text"
-        });
+         });
     </script>
 </body>
 </html>

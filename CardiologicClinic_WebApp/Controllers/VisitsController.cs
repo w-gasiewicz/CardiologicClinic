@@ -59,11 +59,6 @@ namespace CardiologicClinic_WebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-                var x2 = 9;
-            }
             return View(visit);
         }
 

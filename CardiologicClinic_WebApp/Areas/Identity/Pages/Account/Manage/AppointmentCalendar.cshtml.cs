@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
+using DHTMLX.Scheduler;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,7 +20,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         DbContextOptionsBuilder<ApplicationDbContext> _optionsBuilder;
         private UserManager<ApplicationUser> _userManager;
 
-       public AppointmentCalendarModel(UserManager<ApplicationUser> userManager)
+        public AppointmentCalendarModel(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
@@ -54,6 +55,30 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
 
                 return visits;
             }
+        }
+        public class SchedulerEvent
+        {
+            DateTime start_date;
+            DateTime end_date;
+            String text;
+
+            public SchedulerEvent(DateTime start, DateTime end, String text)
+            {
+                this.start_date = start;
+                this.end_date = end.AddHours(1);//visit take always 1 hour
+                this.text = text;
+            }
+        }
+        public List<SchedulerEvent> FillCalendar(List<Visit> visits)
+        {
+            List<SchedulerEvent> schedulerEvents = new List<SchedulerEvent>();
+
+            foreach(var item in visits)
+            {
+                SchedulerEvent se = new SchedulerEvent(item.VisitDate, item.VisitDate, item.VisitName);
+                schedulerEvents.Add(se);
+            }
+            return schedulerEvents;
         }
     }
 }
