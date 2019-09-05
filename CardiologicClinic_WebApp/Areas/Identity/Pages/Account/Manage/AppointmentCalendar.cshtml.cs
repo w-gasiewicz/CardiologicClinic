@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
 {
@@ -58,9 +59,9 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         }
         public class SchedulerEvent
         {
-            DateTime start_date;
-            DateTime end_date;
-            String text;
+            public DateTime start_date;
+            public DateTime end_date;
+            public String text;
 
             public SchedulerEvent(DateTime start, DateTime end, String text)
             {
@@ -73,7 +74,13 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         {
             List<SchedulerEvent> schedulerEvents = new List<SchedulerEvent>();
 
-            foreach(var item in visits)
+            using (StreamReader r = new StreamReader("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json"))
+            {
+                string json = r.ReadToEnd();
+                List<SchedulerEvent> items = JsonConvert.DeserializeObject<List<SchedulerEvent>>(json);
+            }
+
+            foreach (var item in visits)
             {
                 SchedulerEvent se = new SchedulerEvent(item.VisitDate, item.VisitDate, item.VisitName);
                 schedulerEvents.Add(se);

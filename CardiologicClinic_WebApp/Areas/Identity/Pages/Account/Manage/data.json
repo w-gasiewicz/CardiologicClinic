@@ -1,0 +1,5 @@
+[
+            { "text": "Meeting", "start_date": "09/11/2019 19:00", "end_date": "09/11/2019 17:00" },
+            { "text": "Conference", "start_date": "09/15/2019 12:00", "end_date": "09/15/2019 19:00" },
+            { "text": "Interview", "start_date": "09/09/2019 09:00", "end_date": "09/09/2019 10:00" }
+]
