@@ -44,6 +44,7 @@
     <script type="text/javascript">
         scheduler.config.readonly = true;
         scheduler.config.show_loading = true;
+        scheduler.config.data_format = "MM/DD/YYYY HH:MM";
 
         scheduler.locale = {
             date: {
@@ -69,8 +70,7 @@
                 section_time: "Okres czasu"
             }
         }
-        scheduler.init('scheduler_here', new Date(2019, 0, 20), "week");
-        scheduler.parse("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json","json");
+        //scheduler.load("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json"/*,"json"*/);
         //scheduler.addEvent({
         //    start_date: "06-09-2019 9:00",
         //    end_date: "06-09-2019 12:00",
@@ -83,9 +83,22 @@
             {text: "Interview", start_date: "09/09/2019 09:00", end_date: "09/09/2019 10:00" }
         ];
         /*C:/Users/FUJITSU/ource/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage*/
-        
        // scheduler.parse(events, "json");
-       
+
+<data>
+@foreach (var myevent in schedulerEvents)
+{
+    var d1 = @myevent.start_date/*.ToString("mm/dd/yyyy HH:MM")*/;
+    <event>
+        <text>@myevent.text></text>
+        <start_date>@d1</start_date>
+        <end_date>@myevent.end_date@*.ToString("mm/dd/yyyy HH:MM")*@</end_date>
+    </event>
+    var initdate = myevent.start_date;
+}
+</data>
+
+        scheduler.init('scheduler_here', new Date(2019,08,09),"week");
     </script>
 </body>
 </html>

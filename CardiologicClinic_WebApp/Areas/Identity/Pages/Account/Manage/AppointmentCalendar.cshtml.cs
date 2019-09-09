@@ -74,15 +74,16 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         {
             List<SchedulerEvent> schedulerEvents = new List<SchedulerEvent>();
 
-            using (StreamReader r = new StreamReader("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json"))
-            {
-                string json = r.ReadToEnd();
-                List<SchedulerEvent> items = JsonConvert.DeserializeObject<List<SchedulerEvent>>(json);
-            }
+            //using (StreamReader r = new StreamReader("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json"))
+            //{
+            //    string json = r.ReadToEnd();
+            //    List<SchedulerEvent> items = JsonConvert.DeserializeObject<List<SchedulerEvent>>(json);
+            //    schedulerEvents = items;
+            //}
 
             foreach (var item in visits)
             {
-                SchedulerEvent se = new SchedulerEvent(item.VisitDate, item.VisitDate, item.VisitName);
+                   SchedulerEvent se = new SchedulerEvent(item.VisitDate, item.VisitDate, item.VisitName);
                 schedulerEvents.Add(se);
             }
             return schedulerEvents;
