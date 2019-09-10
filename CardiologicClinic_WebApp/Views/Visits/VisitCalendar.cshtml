@@ -1,21 +1,9 @@
-﻿@page
-@model AppointmentCalendarModel
-@inject UserManager<ApplicationUser> UserManager
-@using  CardiologicClinic_WebApp.Models;
-@using DHTMLX.Scheduler;
+﻿@model IEnumerable<CardiologicClinic_WebApp.Models.SchedulerEvent>
 @{
-    ViewData["Title"] = "Kalendarz wizyt";
-    ViewData["ActivePage"] = ManageNavPages.AppointmentCalendar;
-    AppointmentCalendarModel acm = new AppointmentCalendarModel(UserManager);
-    var visits = Model.GetUsersVisitAsync().Result;
-    var schedulerEvents = Model.FillCalendar(visits);
-
-    var text = "Conference";
-    var start_date = "09/15/2019 12:00";
-    var end_date = "09/15/2019 19:00";
+    ViewData["Title"] = "VisitCalendar";
 }
 
-<h4>@ViewData["Title"]</h4>
+<h2>VisitCalendar</h2>
 
 <!DOCTYPE html>
 <html>
@@ -32,16 +20,6 @@
         }
     </style>
 </head>
-@*<data>
-    @foreach (var myevent in schedulerEvents)
-    {
-        <event>
-            <text>@myevent.text</text>
-            <start_date>@myevent.start_date</start_date>
-            <end_date>@myevent.end_date</end_date>
-        </event>
-    }
-</data>*@
 <body>
     <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:80vh;'>
         <div class="dhx_cal_navline">
@@ -56,7 +34,6 @@
         <div class="dhx_cal_header"></div>
         <div class="dhx_cal_data"></div>
     </div>
-
     <script type="text/javascript">
         scheduler.config.readonly = true;
         scheduler.config.show_loading = true;
@@ -86,40 +63,7 @@
                 section_time: "Okres czasu"
             }
         }
-        var schedulerList = [];
-        scheduler.init("scheduler_here");
-        @foreach (var myevent in schedulerEvents)
-        {
-        <text>
-        //scheduler.addEvent({
-        var event = {
-            start_date:  @myevent.start_date,
-            end_date:  @myevent.end_date,
-            text:  @myevent.text;
-            //      });
-        };
-        schedulerList.push(event);
-        </text>
-        }
-        scheduler.parse(schedulerList, "json");
-        //scheduler.addEvent({
-        //             start_date: "06-09-2019 9:00",
-        //             end_date: "06-09-2019 12:00",
-        //                text: "text"
-        //         });
-
-            // var events = [
-            //{text: "Meeting", start_date: "09/11/2013 19:00", end_date: "09/11/2013 17:00" },
-            //{text: "Conference", start_date: "09/15/2019 12:00", end_date: "09/15/2019 19:00" },
-            //{text: "Interview", start_date: "09/09/2019 09:00", end_date: "09/09/2019 10:00" }
-            //];
-            //  scheduler.parse(events, "json");
-
-       @*scheduler.load("@Href("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json")");
-            var dp = new dataProcessor();
-            dp.init(scheduler);
-            dp.setTransactionMode("POST", false);*@
-
+        scheduler.init('scheduler_here', new Date(2019, 08, 09), "week");
     </script>
 </body>
 </html>

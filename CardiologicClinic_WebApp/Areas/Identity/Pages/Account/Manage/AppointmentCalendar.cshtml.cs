@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 
 namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
 {
@@ -28,6 +26,15 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
 
         public void OnGet()
         {
+        }
+        public IActionResult ShowEvents(List<SchedulerEvent> schedulerEvents)
+        {
+            var scheduler = new DHXScheduler();
+            scheduler.DataAction = "Events";
+            scheduler.LoadData = true;
+
+            scheduler.Data.Parse(schedulerEvents);
+            return Page();
         }
         public string GetConnectionString()
         {
@@ -57,6 +64,16 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
                 return visits;
             }
         }
+        public List<SchedulerEvent> FillCalendar(List<Visit> visits)
+        {
+            List<SchedulerEvent> schedulerEvents = new List<SchedulerEvent>();
+            foreach (var item in visits)
+            {
+                SchedulerEvent se = new SchedulerEvent(item.VisitDate, item.VisitDate, item.VisitName);
+                schedulerEvents.Add(se);
+            }
+            return schedulerEvents;
+        }
         public class SchedulerEvent
         {
             public DateTime start_date;
@@ -69,24 +86,6 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
                 this.end_date = end.AddHours(1);//visit take always 1 hour
                 this.text = text;
             }
-        }
-        public List<SchedulerEvent> FillCalendar(List<Visit> visits)
-        {
-            List<SchedulerEvent> schedulerEvents = new List<SchedulerEvent>();
-
-            //using (StreamReader r = new StreamReader("C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/Areas/Identity/Pages/Account/Manage/data.json"))
-            //{
-            //    string json = r.ReadToEnd();
-            //    List<SchedulerEvent> items = JsonConvert.DeserializeObject<List<SchedulerEvent>>(json);
-            //    schedulerEvents = items;
-            //}
-
-            foreach (var item in visits)
-            {
-                   SchedulerEvent se = new SchedulerEvent(item.VisitDate, item.VisitDate, item.VisitName);
-                schedulerEvents.Add(se);
-            }
-            return schedulerEvents;
         }
     }
 }
