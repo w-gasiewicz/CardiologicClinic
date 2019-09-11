@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using CardiologicClinic_WebApp.Data;
@@ -76,14 +77,17 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         }
         public class SchedulerEvent
         {
-            public DateTime start_date;
-            public DateTime end_date;
-            public String text;
+            [DisplayName("start_date")]
+            public string start_date;
+            [DisplayName("end_date")]
+            public string end_date;
+            [DisplayName("text")]
+            public string text;
 
             public SchedulerEvent(DateTime start, DateTime end, String text)
             {
-                this.start_date = start;
-                this.end_date = end.AddHours(1);//visit take always 1 hour
+                this.start_date = start.ToString();
+                this.end_date = end.AddHours(1).ToString();//visit take always 1 hour
                 this.text = text;
             }
         }
