@@ -8,8 +8,6 @@
     AppointmentCalendarModel acm = new AppointmentCalendarModel(UserManager);
     var visits = Model.GetUsersVisitAsync().Result;
     var schedulerEvents = Model.FillCalendar(visits);
-
-    var x="zxdxdx";
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -72,14 +70,7 @@
                 section_time: "Okres czasu"
             }
         }
-
-        @*var start = "09.09.2019 09:00:00";
-        var end = "09.09.2019 19:00:00";
-        var text = "@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(x))";//"test";
-
-        alert(text);*@
-
-            scheduler.init('scheduler_here', new Date(2019, 08, 09), "week");
+        scheduler.init('scheduler_here', new Date(2019, 08, 09), "week");
 
         @foreach (var myevent in schedulerEvents)
         {

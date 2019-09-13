@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - System zarządzania kliniką kardiologiczną</title>
 
     <environment include="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -48,9 +49,14 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2019 - System zarządzania kliniką kardiologiczną</p>
-        </footer>
+        <center>
+            <footer>
+                <a href="/Identity/Account/Contact" class="btn btn-default"><span class="fa fa-phone"></span> Kontakt telefoniczny: pn-pt 8:00 - 16:00</a>
+                <a href="/Home/About#localization" class="btn btn-default"><span class="fa fa-map" aria-hidden="true"></span> Nasza lokalizacja</a>
+                <a href="/Home/About#localization" class="btn btn-default"><span class="fa fa-address-card-o" aria-hidden="true"></span> Całodobowa rejestracja online</a>
+                <p>&copy; 2019 - System zarządzania kliniką kardiologiczną</p>
+            </footer>
+        </center>
     </div>
 
     <environment include="Development">

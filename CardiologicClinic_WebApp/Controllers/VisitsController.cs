@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
-using CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage;
-using Microsoft.AspNetCore.Identity;
-using DHTMLX.Scheduler;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -17,12 +14,6 @@ namespace CardiologicClinic_WebApp.Controllers
         public VisitsController(ApplicationDbContext context)
         {
             _context = context;
-        }
-        public IActionResult VisitCalendar(/*UserManager<ApplicationUser> userManager*/)
-        {
-            ////AppointmentCalendarModel acm = new AppointmentCalendarModel(userManager);
-            //var scheduler = new DHXScheduler(this);
-            return View(/*acm.FillCalendar(acm.GetUsersVisitAsync().Result)*/);
         }
         // GET: Visits
         public async Task<IActionResult> Index()
