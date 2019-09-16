@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<CardiologicClinic_WebApp.Models.Visit>
-
+@using CardiologicClinic_WebApp.Areas.Identity.Services;
 @{
     ViewData["Title"] = "Wizyty";
+    VisitService vs = new VisitService();
+
 }
 
 <h2>Wizyty</h2>
@@ -13,10 +15,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdPatient)
+                Pacjent
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDoctor)
+                Lekarz
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.VisitDate)
@@ -28,26 +30,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPatient)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VisitDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VisitName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @vs.GetSpecificUser(item.IdPatient)
+                </td>
+                <td>
+                    @vs.GetSpecificUser(item.IdDoctor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VisitDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VisitName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

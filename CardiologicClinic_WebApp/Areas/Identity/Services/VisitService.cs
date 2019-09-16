@@ -1,4 +1,5 @@
 ﻿using CardiologicClinic_WebApp.Data;
+using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +39,17 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                                               }).ToList();
             }
         }
-
+        public string GetSpecificUser(string id)
+        {
+            _connectionString = GetConnectionString();
+            _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            _optionsBuilder.UseSqlServer(_connectionString);
+            using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
+            {
+                var User = _context.ApplicationUser.FirstOrDefault(u => u.Id == id);
+                return User.Name + " " + User.UserSurname;
+            }
+        }
         public VisitService()
         {
 
