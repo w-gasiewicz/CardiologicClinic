@@ -4,7 +4,9 @@
     ViewData["Title"] = "Kontakt";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewData["Title"]</h2>
+<hr />
+<h2>Skontaktuj się z nami</h2>
+<hr />
 <h3>@ViewData["Message"]</h3>
 
 <address>
@@ -15,12 +17,11 @@
 </address>
 
 <address>
-    <strong>Przychodnia:</strong> <a href="mailto:Support@example.com">mail@przychodnia.com</a><br />
+    <strong>Email:</strong> <a href="mailto:Support@example.com">mail@przychodnia.com</a><br />
 </address>
 
 <div class="row">
     <div class="col-md-12">
-        <h3>Skontaktuj się z nami</h3>
     </div>
 </div>
 <form class="form form-horizontal" method="post">
@@ -71,7 +72,6 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @*<button type="submit" class="btn btn-success">Wyślij</button>*@
             <input type="submit" />
         </div>
     </div>

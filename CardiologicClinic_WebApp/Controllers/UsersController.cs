@@ -135,6 +135,14 @@ namespace CardiologicClinic_WebApp.Controllers
 
                     if (orgUser.Role != user.Role)
                     {
+                        if (await _userManager.IsInRoleAsync(orgUser, "Recepcion"))
+                            await _userManager.RemoveFromRoleAsync(orgUser, "Recepcion");
+                        if (await _userManager.IsInRoleAsync(orgUser, "Admin"))
+                            await _userManager.RemoveFromRoleAsync(orgUser, "Admin");
+                        if (await _userManager.IsInRoleAsync(orgUser, "Doctor"))
+                            await _userManager.RemoveFromRoleAsync(orgUser, "Doctor");
+                        if (await _userManager.IsInRoleAsync(orgUser, "User"))
+                            await _userManager.RemoveFromRoleAsync(orgUser, "User");
                         if (await _userManager.IsInRoleAsync(orgUser, user.Role))
                             await _userManager.RemoveFromRoleAsync(orgUser, user.Role);
                         await _userManager.AddToRoleAsync(orgUser, user.Role);
