@@ -241,3 +241,14 @@ html {
         background-color: #555;
     }
 
+.container {
+    margin-top: 20px;
+}
+
+.page {
+    display: none;
+}
+
+.page-active {
+    display: block;
+}
