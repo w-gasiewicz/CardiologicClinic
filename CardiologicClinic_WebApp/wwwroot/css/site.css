@@ -240,15 +240,18 @@ html {
     .buttonABOUT:hover {
         background-color: #555;
     }
-
-.container {
-    margin-top: 20px;
-}
-
+    
 .page {
     display: none;
 }
 
 .page-active {
     display: block;
+}
+#framerounded {
+    border-radius: 25px;
+    border: 2px solid #999999;
+    padding: 20px;
+    width: auto;
+    height: auto;
 }

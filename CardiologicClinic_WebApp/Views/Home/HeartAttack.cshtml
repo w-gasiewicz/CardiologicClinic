@@ -12,96 +12,95 @@
 <p>Tutaj będzie ai na atak serca.</p>
 <p>Przychodnia oferuje pomoc lekarską w zakresie kardiologicznym.</p>
 
+<hr/>
 <h4>Wypełnij formularz abyśmy mogli zbadać Twoje dane modułem diagnostycznym.</h4>
+<hr/>
 
-<div class="row">
-    <div class="col-md-6">
-        <form method="post">
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-
-            <h3>Informacje podstawowe:</h3>
-            <div class="form-group">
-                <label asp-for="Input.Age"></label>
-                <input asp-for="Input.Age" class="form-control" />
-                <span asp-validation-for="Input.Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Sex"></label>
-                <select asp-for="Input.Sex">
-                    <option value="1">Mężczyzna</option>
-                    <option value="0">Kobieta</option>
-                </select>
-                <span asp-validation-for="Input.Sex" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.PainLocation"></label>
-                <select asp-for="Input.PainLocation">
-                    <option value="1">Mostek</option>
-                    <option value="2">Lewy przedsercowy</option>
-                    <option value="3">Prawy przedsercowy</option>
-                    <option value="4">Lewy boczny klatki piersiowej</option>
-                    <option value="5">Prawy boczny klatki piersiowej</option>
-                    <option value="6">Brzuszny</option>
-                    <option value="7">Plecy</option>
-                    <option value="8">Inny</option>
-                </select>
-                <span asp-validation-for="Input.PainLocation" class="text-danger"></span>
-            </div> <div class="form-group">
-                <label asp-for="Input.ChestPainRadiation"></label>
-                <select asp-for="Input.ChestPainRadiation">
-                    <option value="1">Szyja</option>
-                    <option value="2">Szczęka</option>
-                    <option value="3">Lewe ramię</option>
-                    <option value="4">Lewa ręka</option>
-                    <option value="5">Prawe ramię</option>
-                    <option value="6">Plecy</option>
-                    <option value="7">Brzuch</option>
-                    <option value="8">Inne</option>
-                </select>
-                <span asp-validation-for="Input.ChestPainRadiation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.PainCharacter"></label>
-                <select asp-for="Input.PainCharacter">
-                    <option value="1">Stały</option>
-                    <option value="2">Epizodyczny</option>
-                    <option value="3">Raczej epizodyczny niż stały</option>
-                    <option value="4">Raczej stały niż epizodyczny</option>
-                    <option value="5">Tępy</option>
-                    <option value="6">Ostry</option>
-                    <option value="7">Palący</option>
-                    <option value="8">Opłucowny</option>
-                </select>
-                <span asp-validation-for="Input.PainCharacter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.OnsetOfPain"></label>
-                <select asp-for="Input.OnsetOfPain">
-                    <option value="1">??????</option>
-                    <option value="2">Podczas odpoczynku</option>
-                    <option value="3">Podczas snu</option>
-                </select>
-                <span asp-validation-for="Input.OnsetOfPain" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.NumOfHoursSinceOnset"></label>
-                <input asp-for="Input.NumOfHoursSinceOnset" class="form-control" />
-                <span asp-validation-for="Input.NumOfHoursSinceOnset" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.DurationOfTheLastEpisode"></label>
-                <select asp-for="Input.DurationOfTheLastEpisode">
-                    <option value="1">Mniej niż 5 minut</option>
-                    <option value="2">5 - 30 minut</option>
-                    <option value="3">30 - 60 minut</option>
-                    <option value="4">1 - 6 godzin</option>
-                    <option value="5">6 - 12 godzin</option>
-                    <option value="6">Powyżej 12 godzin</option>
-                </select>
-                <span asp-validation-for="Input.DurationOfTheLastEpisode" class="text-danger"></span>
-            </div>
-
+    <div class="container"  id="framerounded">
+        <div class="page" id="page1" >
+                <h3>Informacje podstawowe:</h3>
+                <div class="form-group">
+                    <label asp-for="Input.Age"></label>
+                    <input asp-for="Input.Age" class="form-control" />
+                    <span asp-validation-for="Input.Age" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Sex"></label>
+                    <select asp-for="Input.Sex">
+                        <option value="1">Mężczyzna</option>
+                        <option value="0">Kobieta</option>
+                    </select>
+                    <span asp-validation-for="Input.Sex" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.PainLocation"></label>
+                    <select asp-for="Input.PainLocation">
+                        <option value="1">Mostek</option>
+                        <option value="2">Lewy przedsercowy</option>
+                        <option value="3">Prawy przedsercowy</option>
+                        <option value="4">Lewy boczny klatki piersiowej</option>
+                        <option value="5">Prawy boczny klatki piersiowej</option>
+                        <option value="6">Brzuszny</option>
+                        <option value="7">Plecy</option>
+                        <option value="8">Inny</option>
+                    </select>
+                    <span asp-validation-for="Input.PainLocation" class="text-danger"></span>
+                </div> <div class="form-group">
+                    <label asp-for="Input.ChestPainRadiation"></label>
+                    <select asp-for="Input.ChestPainRadiation">
+                        <option value="1">Szyja</option>
+                        <option value="2">Szczęka</option>
+                        <option value="3">Lewe ramię</option>
+                        <option value="4">Lewa ręka</option>
+                        <option value="5">Prawe ramię</option>
+                        <option value="6">Plecy</option>
+                        <option value="7">Brzuch</option>
+                        <option value="8">Inne</option>
+                    </select>
+                    <span asp-validation-for="Input.ChestPainRadiation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.PainCharacter"></label>
+                    <select asp-for="Input.PainCharacter">
+                        <option value="1">Stały</option>
+                        <option value="2">Epizodyczny</option>
+                        <option value="3">Raczej epizodyczny niż stały</option>
+                        <option value="4">Raczej stały niż epizodyczny</option>
+                        <option value="5">Tępy</option>
+                        <option value="6">Ostry</option>
+                        <option value="7">Palący</option>
+                        <option value="8">Opłucowny</option>
+                    </select>
+                    <span asp-validation-for="Input.PainCharacter" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.OnsetOfPain"></label>
+                    <select asp-for="Input.OnsetOfPain">
+                        <option value="1">??????</option>
+                        <option value="2">Podczas odpoczynku</option>
+                        <option value="3">Podczas snu</option>
+                    </select>
+                    <span asp-validation-for="Input.OnsetOfPain" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.NumOfHoursSinceOnset"></label>
+                    <input asp-for="Input.NumOfHoursSinceOnset" class="form-control" />
+                    <span asp-validation-for="Input.NumOfHoursSinceOnset" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.DurationOfTheLastEpisode"></label>
+                    <select asp-for="Input.DurationOfTheLastEpisode">
+                        <option value="1">Mniej niż 5 minut</option>
+                        <option value="2">5 - 30 minut</option>
+                        <option value="3">30 - 60 minut</option>
+                        <option value="4">1 - 6 godzin</option>
+                        <option value="5">6 - 12 godzin</option>
+                        <option value="6">Powyżej 12 godzin</option>
+                    </select>
+                    <span asp-validation-for="Input.DurationOfTheLastEpisode" class="text-danger"></span>
+                </div>
+        </div>
+        <div class="page" id="page2" >
             <h3>Objawy współwystępujące:</h3>
             <div class="form-group">
                 <label asp-for="Input.Nausea"></label>
@@ -158,6 +157,8 @@
                 </select>
                 <span asp-validation-for="Input.PalliativeFactors" class="text-danger"></span>
             </div>
+        </div>
+        <div class="page" id="page3">
             <h3>Występowanie podobnych bóli w przeszłości:</h3>
             <div class="form-group">
                 <label asp-for="Input.PriorChestPainOfThisType"></label>
@@ -195,6 +196,8 @@
                 </select>
                 <span asp-validation-for="Input.PriorPainDueToAnginaPectoris" class="text-danger"></span>
             </div>
+        </div>
+        <div class="page" id="page4">
             <h3>Historia choroby:</h3>
             <div class="form-group">
                 <label asp-for="Input.PriorMI"></label>
@@ -260,6 +263,8 @@
                 </select>
                 <span asp-validation-for="Input.Smoker" class="text-danger"></span>
             </div>
+        </div>
+        <div class="page" id="page5">
             <h3>Aktualnie stosowane leki:</h3>
             <div class="form-group">
                 <label asp-for="Input.Diuretics"></label>
@@ -304,6 +309,7 @@
                 </select>
                 <span asp-validation-for="Input.Antacids" class="text-danger"></span>
             </div>
+        </div> <div class="page" id="page6">
             <h3>Badania lekarskie:</h3>
             <div class="form-group">
                 <label asp-for="Input.SystolicBloodPressure"></label>
@@ -398,7 +404,8 @@
                 </select>
                 <span asp-validation-for="Input.DiaphoresisPE" class="text-danger"></span>
             </div>
-
+        </div>
+        <div class="page" id="page7">
             <h3>Badania EKG:</h3>
             <div class="form-group">
                 <label asp-for="Input.NewQWave"></label>
@@ -471,43 +478,11 @@
                 </select>
                 <span asp-validation-for="Input.AnyIntraventricularConductionDefect" class="text-danger"></span>
             </div>
-
             <form><button asp-action="Diagnosis" class="btn btn-default">Zbadaj</button></form>
-        </form>
-    </div>
-    <center><ul id="pagination-demo" class="pagination-lg"></ul></center>
-</div>
-
-
-<div class="container">
-    <div class="jumbotron page" id="page1">
-        <div class="container">
-            <h1 class="display-3">Adding Pagination to your Website</h1><br>
-            <p class="lead">In this article we teach you how to add pagination, an excellent way to navigate large amounts of content, to your website using a jQuery Bootstrap Plugin.</p><br>
-            <p><a class="btn btn-lg btn-success" href="#" role="button">Learn More</a></p>
         </div>
     </div>
-    <div class="jumbotron page" id="page2">
-        <h1 class="display-3">Not Another Jumbotron</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
-    </div>
-    <div class="jumbotron page" id="page3">
-        <h1 class="display-3">Data. Data. Data.</h1>
-        <p>This example is a quick exercise to illustrate how the default responsive navbar works. It's placed within a <code>.container</code> to limit its width and will scroll with the rest of the page's content.</p>
-        <p><a class="btn btn-lg btn-primary" href="../../components/navbar" role="button">View navbar docs »</a></p>
-    </div>
-    <div class="jumbotron page" id="page4">
-        <h1 style="-webkit-user-select: auto;">Buy Now!</h1>
-        <p class="lead" style="-webkit-user-select: auto;">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-        <p style="-webkit-user-select: auto;"><a class="btn btn-lg btn-success" href="#" role="button" style="-webkit-user-select: auto;">Get started today</a></p>
-    </div>
-    <div class="jumbotron page" id="page5">
-        <h1 class="cover-heading">Cover your page.</h1>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-        <p class="lead"><a href="#" class="btn btn-lg btn-primary">Learn more</a></p>
-    </div>
-</div>
+
+    <center><ul id="pagination-demo" class="pagination-lg"></ul></center>
 
 <script type="text/javascript">
 $('#pagination-demo').twbsPagination({
