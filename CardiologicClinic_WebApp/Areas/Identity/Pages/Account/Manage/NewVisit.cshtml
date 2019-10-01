@@ -22,6 +22,13 @@
 
 </head>
 <body>
+    <style>
+        .nav-pills > li.active > a,
+        .nav-pills > li.active > a:focus,
+        .nav-pills > li.active > a:hover {
+            background-color: #222222;
+        }
+    </style>
     @*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*@
     <ul class="nav navbar-nav">
         <h2>Dostępni lekarze:</h2>
@@ -29,17 +36,17 @@
         {@if (UserManager.IsInRoleAsync(item, "Doctor").Result)
             {
                 var name = item.Name + " " + item.UserSurname + " ";
-        <center>
-            <li class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">@name<span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
-                    <li class="divider"></li>
-                    <li><a  asp-controller="Users" asp-action="DoctorDetails" asp-route-id="@item.Id" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
-                </ul>
-            </li>
-            <br>
-        </center>
+                <center>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">@name<span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="AppointmentCalendar" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
+                            <li class="divider"></li>
+                            <li><a asp-controller="Users" asp-action="DoctorDetails" asp-route-id="@item.Id" style="color:black">Dane lekarza <span class="glyphicon glyphicon-folder-open pull-right" style="color:black"></span></a></li>
+                        </ul>
+                    </li>
+                    <br>
+                </center>
             }
     }
     </ul>

@@ -6,19 +6,26 @@
     UserCntroller role = new UserCntroller();
     var user = await UserManager.GetUserAsync(User);
 }
+<style>
+    .nav-pills > li.active > a,
+    .nav-pills > li.active > a:focus,
+    .nav-pills > li.active > a:hover {
+        background-color: #222222;
+    }
+</style>
 <ul class="nav nav-pills nav-stacked">
     <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index">Profil</a></li>
-    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">Hasło</a></li>
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Dane osobowe</a></li>
-    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a @*asp-controller="Visits" asp-action="VisitCalendar"*@ asp-page="./AppointmentCalendar">Kalendarz moich wizyt</a></li>
-    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">Hasło</a></li>
+    <li class="@ManageNavPages.AppointmentCalendarNavClass(ViewContext)"><a asp-page="./AppointmentCalendar">Kalendarz moich wizyt</a></li>
+    <li class="@ManageNavPages.NewVisitNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
     @if (UserManager.IsInRoleAsync(user, "Admin").Result)
     {
-        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./UserView">Zarządzaj użytkownikami</a></li>
-    } 
+        <li><a asp-page="./UserView">Zarządzaj użytkownikami</a></li>
+    }
     @if (UserManager.IsInRoleAsync(user, "Doctor").Result || UserManager.IsInRoleAsync(user, "Admin").Result || UserManager.IsInRoleAsync(user, "Recepcion").Result)
     {
-        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-controller="Visits" asp-action="Index">Dodaj nową wizytę</a></li>
+        <li><a asp-controller="Visits" asp-action="Index">Dodaj nową wizytę</a></li>
     }
-    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./ToDownload">Do pobrania</a></li>
+    <li class="@ManageNavPages.ToDownloadNavClass(ViewContext)"><a asp-page="./ToDownload">Do pobrania</a></li>
 </ul>
