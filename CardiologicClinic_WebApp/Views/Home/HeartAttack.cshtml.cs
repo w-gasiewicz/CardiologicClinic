@@ -60,7 +60,7 @@ namespace CardiologicClinic_WebApp.Views.Home
             [Display(Name = "Zawroty g³owy")]
             public bool Dizziness { get; set; }
             [Required]
-            [Display(Name = "Bekanie??????????")]
+            [Display(Name = "Bekanie")]
             public bool Burping { get; set; }
             [Required]
             [Display(Name = "Czynniki ³agodz¹ce")]

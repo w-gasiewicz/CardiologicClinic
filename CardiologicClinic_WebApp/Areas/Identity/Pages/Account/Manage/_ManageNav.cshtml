@@ -18,7 +18,6 @@
     <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Dane osobowe</a></li>
     <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">Hasło</a></li>
     <li class="@ManageNavPages.AppointmentCalendarNavClass(ViewContext)"><a asp-page="./AppointmentCalendar">Kalendarz moich wizyt</a></li>
-    <li class="@ManageNavPages.NewVisitNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
     @if (UserManager.IsInRoleAsync(user, "Admin").Result)
     {
         <li><a asp-page="./UserView">Zarządzaj użytkownikami</a></li>
@@ -27,5 +26,6 @@
     {
         <li><a asp-controller="Visits" asp-action="Index">Dodaj nową wizytę</a></li>
     }
+    <li class="@ManageNavPages.NewVisitNavClass(ViewContext)"><a asp-page="./NewVisit">Umów wizytę</a></li>
     <li class="@ManageNavPages.ToDownloadNavClass(ViewContext)"><a asp-page="./ToDownload">Do pobrania</a></li>
 </ul>
