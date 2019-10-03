@@ -1,5 +1,6 @@
 ﻿using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
 
         public static List<SelectListItem> Patients { get; set; }
         public static List<SelectListItem> Doctors { get; set; }
-        public void GetUsers()
+        public void GetUsers(UserManager<ApplicationUser> _um)
         {
             _connectionString = GetConnectionString();
             _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -31,12 +32,25 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                                               Text =a.Name +" "+ a.UserSurname
                                           }).ToList();
 
-                Doctors = _context.ApplicationUser.Select(a =>
-                                              new SelectListItem
-                                              {
-                                                  Value = a.Id.ToString(),
-                                                  Text = a.Name + " " + a.UserSurname
-                                              }).ToList();
+                Patients.Add(new SelectListItem
+                {
+                    Value = null,
+                    Text = null
+                });//add null value to list
+                
+                Doctors = _context.ApplicationUser.Select(a => 
+                                             new SelectListItem
+                                             {
+                                                 Value = a.Id.ToString(),
+                                                 Text = a.Name + " " + a.UserSurname
+                                             }).ToList();
+
+                //Doctors = _context.ApplicationUser.Where(u => u.Role == "Doctor").Select(a =>
+                //                             new SelectListItem
+                //                             {
+                //                                 Value = a.Id.ToString(),
+                //                                 Text = a.Name + " " + a.UserSurname
+                //                             }).ToList();
             }
         }
         public string GetSpecificUser(string id)
@@ -47,7 +61,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
             {
                 var User = _context.ApplicationUser.FirstOrDefault(u => u.Id == id);
-                return User.Name + " " + User.UserSurname;
+                return  User.Name + " " + User.UserSurname;
             }
         }
         public VisitService()

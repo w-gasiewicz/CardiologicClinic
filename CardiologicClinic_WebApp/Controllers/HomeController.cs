@@ -60,8 +60,6 @@ namespace CardiologicClinic_WebApp.Controllers
 
         public IActionResult Diagnosis(HeartAttackModel.InputModel Input)
         {
-            int x = 0;
-
             HeartData userData = new HeartData()
             {
                 Age = Input.Age,
@@ -124,7 +122,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 NewIntraventricularConductionDefect = Input.NewIntraventricularConductionDefect,
                 AnyIntraventricularConductionDefect = Input.AnyIntraventricularConductionDefect
             };
-           // RunAI.Run();
+            RunAI.Run();
             RunAI.Test(userData);
             HeartAttackModel.result = RunAI.result;
             HeartAttackModel.isIll = RunAI.isIll;
