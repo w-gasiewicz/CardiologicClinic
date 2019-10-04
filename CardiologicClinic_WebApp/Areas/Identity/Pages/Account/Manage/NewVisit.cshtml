@@ -7,7 +7,7 @@
     ViewData["ActivePage"] = ManageNavPages.NewVisit;
 
     CardiologicClinic_WebApp.Areas.Identity.Services.UserService us = new CardiologicClinic_WebApp.Areas.Identity.Services.UserService();
-    var ListOfUsers = us.GetListOfDoctorsAsync().Result;
+    var ListOfUsers = us.GetListOfDoctorsAsync(UserManager).Result;
 }
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,9 @@
     </style>
     @*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*@
     <ul class="nav navbar-nav">
+        <hr />
         <h2>Dostępni lekarze:</h2>
+        <hr/>
         @foreach (var item in ListOfUsers)
         {@if (UserManager.IsInRoleAsync(item, "Doctor").Result)
             {

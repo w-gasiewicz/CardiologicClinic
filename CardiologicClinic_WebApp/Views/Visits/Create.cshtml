@@ -1,11 +1,11 @@
-﻿@page
-@model CardiologicClinic_WebApp.Models.Visit
+﻿@model CardiologicClinic_WebApp.Models.Visit
 @using CardiologicClinic_WebApp.Areas.Identity.Services
+@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Utwórz nową wizytę";
     VisitService vs = new VisitService();
-    vs.GetUsers(UserManager);
+   await vs.GetUsers(UserManager);
 }
 
 <h2>Stwórz nową wizytę</h2>

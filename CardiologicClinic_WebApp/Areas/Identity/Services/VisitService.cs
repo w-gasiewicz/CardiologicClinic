@@ -18,8 +18,12 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
 
         public static List<SelectListItem> Patients { get; set; }
         public static List<SelectListItem> Doctors { get; set; }
-        public void GetUsers(UserManager<ApplicationUser> _um)
+
+        public async System.Threading.Tasks.Task GetUsers(UserManager<ApplicationUser> _um)
         {
+            Doctors = new List<SelectListItem>();
+            Patients = new List<SelectListItem>();
+
             _connectionString = GetConnectionString();
             _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             _optionsBuilder.UseSqlServer(_connectionString);
@@ -29,7 +33,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                                           new SelectListItem
                                           {
                                               Value = a.Id.ToString(),
-                                              Text =a.Name +" "+ a.UserSurname
+                                              Text = a.Name + " " + a.UserSurname
                                           }).ToList();
 
                 Patients.Add(new SelectListItem
@@ -37,20 +41,27 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                     Value = null,
                     Text = null
                 });//add null value to list
-                
-                Doctors = _context.ApplicationUser.Select(a => 
-                                             new SelectListItem
-                                             {
-                                                 Value = a.Id.ToString(),
-                                                 Text = a.Name + " " + a.UserSurname
-                                             }).ToList();
 
-                //Doctors = _context.ApplicationUser.Where(u => u.Role == "Doctor").Select(a =>
-                //                             new SelectListItem
-                //                             {
-                //                                 Value = a.Id.ToString(),
-                //                                 Text = a.Name + " " + a.UserSurname
-                //                             }).ToList();
+                var doctors = await _context.ApplicationUser.ToListAsync();
+                doctors.RemoveAll(x => !_um.IsInRoleAsync(x, "Doctor").Result);
+
+                foreach (var doctor in doctors)
+                {
+                    Doctors.Add(new SelectListItem
+                    {
+                        Value = doctor.Id.ToString(),
+                        Text = doctor.Name + " " + doctor.UserSurname
+                    });
+                }
+                
+                //foreach (var patient in Patients)
+                //{
+                //    foreach (var doctor in Doctors)
+                //    {
+                //        if (doctor.Value == patient.Value)
+                //            Patients.Remove(patient);
+                //    }
+                //}
             }
         }
         public string GetSpecificUser(string id)

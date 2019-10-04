@@ -1,7 +1,11 @@
 ﻿@model CardiologicClinic_WebApp.Models.ApplicationUser
-
+@using CardiologicClinic_WebApp.Areas.Identity.Services
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Edycja użytkownika";
+    UserService us = new UserService();
+    us.SortRoles(UserManager, Model.Id);
 }
 
 <h2>Edytuj użytkownika</h2>
@@ -34,12 +38,7 @@
             </div>
             <div class="form-group">
                 <label>Rola użytkownika</label>
-                <select asp-for="Role">
-                    <option value="Admin">Admin</option>
-                    <option value="User">Użytkownik</option>
-                    <option value="Doctor">Lekarz</option>
-                    <option value="Recepcion">Pracownik recepcji</option>
-                </select>
+                <select asp-for="Role" asp-items="UserService.SortedRoles"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-default" />

@@ -2,15 +2,20 @@
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Claims;
 
 namespace CardiologicClinic_WebApp.Areas.Identity.Services
 {
     public class UserService
     {
+        public static List<SelectListItem> SortedRoles;
+
         private string _connectionString;
         DbContextOptionsBuilder<ApplicationDbContext> _optionsBuilder;
 
@@ -61,7 +66,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 return toReturn;
             }
         }
-        public async System.Threading.Tasks.Task<List<ApplicationUser>> GetListOfDoctorsAsync()
+        public async System.Threading.Tasks.Task<List<ApplicationUser>> GetListOfDoctorsAsync(UserManager<ApplicationUser> _um)
         {
             _connectionString = GetConnectionString();
             _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -69,25 +74,12 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
             {
                 var users = await _context.ApplicationUser.ToListAsync();
-                //foreach(var user in users)
-                //{
-                //    if(user.)
-                //}
+                users.RemoveAll(x => !_um.IsInRoleAsync(x, "Doctor").Result);
                 return users;
             }
         }
         public async System.Threading.Tasks.Task<List<string>> AssignRolesAsync(UserManager<ApplicationUser> _um)
         {
-            //var users2 = _mapper2.Map<List<User>, List<IdentityUser>>(users);
-            // int i = 0;
-            // foreach (var user in users2)
-            // {
-
-            //     var role = await _um.GetRolesAsync(user);
-            //     var array = new List<string>(role).ToArray();
-            //     users[i].UserRole = array[0];
-            //     i++;
-            // }
             List<string> roles = new List<string>();
             _connectionString = GetConnectionString();
             _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
@@ -103,6 +95,34 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 }
             }
             return roles;
+        }
+        public void SortRoles(UserManager<ApplicationUser> _um, string id)
+        {
+            SortedRoles = new List<SelectListItem>();
+            List<string> roles = new List<string> { "Admin", "User", "Doctor", "Recepcion" };
+
+            var user = _um.FindByIdAsync(id).Result;
+
+            if (_um.IsInRoleAsync(user, "User").Result)
+            {
+                roles.Remove("User");
+                roles.Insert(0, "User");
+            }
+            else if (_um.IsInRoleAsync(user, "Doctor").Result)
+            {
+                roles.Remove("Doctor");
+                roles.Insert(0, "Doctor");
+            }
+            else if (_um.IsInRoleAsync(user, "Recepcion").Result)
+            {
+                roles.Remove("Recepcion");
+                roles.Insert(0, "Recepcion");
+            }
+
+            foreach (var role in roles)
+            {
+                SortedRoles.Add(new SelectListItem { Text = role });
+            }
         }
     }
 }

@@ -37,22 +37,22 @@
     <tbody>
         @foreach (var item in ListOfUsers)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => ListOfRoles[i])
-            </td>
-            <td>
-                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                <a asp-controller="Users" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                <a asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => ListOfRoles[i])
+                </td>
+                <td>
+                    <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                    <a asp-controller="Users" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
             i++;
         }
     </tbody>
