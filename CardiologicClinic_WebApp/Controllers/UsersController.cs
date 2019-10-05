@@ -82,10 +82,19 @@ namespace CardiologicClinic_WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var userNew = new ApplicationUser { UserName = user.Email, Email = user.Email, Name = user.Name, PhoneNumber = user.PhoneNumber };
-                var result = await _userManager.CreateAsync(userNew, user.Password);
-                await _userManager.AddToRoleAsync(userNew, user.Role);
-                await _context.SaveChangesAsync();
-                return Redirect("/Identity/Account/Manage/UserView");
+
+                var existingOne = _userManager.FindByEmailAsync(user.Email).Result;
+                if (existingOne != null)
+                {
+                    return Redirect("/Identity/Account/Manage/UserExist");
+                }
+                else
+                {
+                    var result = await _userManager.CreateAsync(userNew, user.Password);
+                    await _userManager.AddToRoleAsync(userNew, user.Role);
+                    await _context.SaveChangesAsync();
+                    return Redirect("/Identity/Account/Manage/UserView");
+                }
             }
             return View(user);
         }

@@ -54,9 +54,20 @@ namespace CardiologicClinic_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(visit);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var patientVisits = _context.Visit.Where(v => v.IdPatient == visit.IdPatient).ToList();
+                var doctorVisits = _context.Visit.Where(v => v.IdDoctor == visit.IdDoctor).ToList();
+
+                patientVisits.RemoveAll(v => v.VisitDate.AddHours(-1) > visit.VisitDate || v.VisitDate.AddHours(1) < visit.VisitDate);
+                doctorVisits.RemoveAll(v => v.VisitDate.AddHours(-1) > visit.VisitDate || v.VisitDate.AddHours(1) < visit.VisitDate);
+
+                if (patientVisits.Count == 0 && doctorVisits.Count == 0)
+                {
+                    _context.Add(visit);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return Redirect("/Identity/Account/Manage/VisitExist");
             }
             return View(visit);
         }

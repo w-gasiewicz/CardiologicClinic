@@ -15,7 +15,6 @@ namespace CardiologicClinic_WebApp.Models
         [Display(Name = "Nazwa wizyty")]
         public string VisitName { get; set; }
         [Display(Name = "Cena")]
-        //[Required(ErrorMessage = "Cena musi być liczbą")]
         public float Price { get; set; }
 
     }
