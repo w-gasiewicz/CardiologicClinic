@@ -122,7 +122,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 NewIntraventricularConductionDefect = Input.NewIntraventricularConductionDefect,
                 AnyIntraventricularConductionDefect = Input.AnyIntraventricularConductionDefect
             };
-            RunAI.Run();
+            //RunAI.Run();
             RunAI.Test(userData);
             HeartAttackModel.result = RunAI.result;
             HeartAttackModel.isIll = RunAI.isIll;
