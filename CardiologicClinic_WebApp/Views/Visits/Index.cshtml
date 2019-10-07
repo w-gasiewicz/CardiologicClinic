@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Wizyty";
     VisitService vs = new VisitService();
-
 }
 
 <h2>Wizyty</h2>
@@ -11,6 +10,17 @@
 <p>
     <a asp-action="Create">Stwórz nową wizytę</a>
 </p>
+
+<form>
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj pacjenta po nazwisku lub imieniu: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input asp-action="Search" method="get" type="submit" value="Szukaj" class="btn btn-default" /> |
+            <a asp-page="/Index">Wróć do pełnej listy wizyt</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

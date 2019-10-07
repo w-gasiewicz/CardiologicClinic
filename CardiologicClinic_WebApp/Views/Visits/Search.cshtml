@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CardiologicClinic_WebApp.Models.Visit>
+@using CardiologicClinic_WebApp.Controllers;
+
+@{
+    ViewData["Title"] = "Wynik wyszukiwania użytkownika";
+    VisitsController vc = new VisitsController(null);
+}
+
+<h2>Wyniki wyszukiwania:</h2>
+
+<div>
+    <a href='javascript:history.go(-1)'>Powrót do listy wizyt</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Pacjent
+            </th>
+            @*<th>
+                Lekarz
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.VisitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisitName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @vc.GetUser(item.IdPatient)
+            </td>
+            @*<td>
+            @vs.GetSpecificUser(item.IdDoctor)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

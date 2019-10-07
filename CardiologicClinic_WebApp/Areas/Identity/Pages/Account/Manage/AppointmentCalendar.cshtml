@@ -44,7 +44,7 @@
     <script type="text/javascript">
         scheduler.config.readonly = true;
         scheduler.config.show_loading = true;
-        scheduler.config.data_format = "MM/dd/yyyy hh:mm";
+        //scheduler.config.data_format = "MM/dd/yyyy hh:mm";
 
         scheduler.locale = {
             date: {
@@ -70,7 +70,7 @@
                 section_time: "Okres czasu"
             }
         }
-        scheduler.init('scheduler_here', new Date(2019, 08, 09), "week");
+        scheduler.init('scheduler_here', new Date(2019, 09, 09), "week");
 
         @foreach (var myevent in schedulerEvents)
         {

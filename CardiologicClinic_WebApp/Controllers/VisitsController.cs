@@ -4,11 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CardiologicClinic_WebApp.Data;
 using CardiologicClinic_WebApp.Models;
+using System;
+using System.Collections.Generic;
+using CardiologicClinic_WebApp.Areas.Identity.Services;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
     public class VisitsController : Controller
     {
+        public static List<ApplicationUser> patients;
+
         private readonly ApplicationDbContext _context;
 
         public VisitsController(ApplicationDbContext context)
@@ -19,6 +24,43 @@ namespace CardiologicClinic_WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Visit.ToListAsync());
+        }
+
+        public async Task<IActionResult/*List<ApplicationUser>*/> Search(string sortOrder, string searchString)
+        {
+            var visits = from s in _context.Visit
+                        select s;
+
+            patients = new List<ApplicationUser>();
+            patients = _context.ApplicationUser.ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                patients.RemoveAll( u => !u.UserName.ToUpper().Contains(searchString.ToUpper()) && !u.UserSurname.ToUpper().Contains(searchString.ToUpper()));
+
+                foreach (var user in patients)
+                {
+                    visits = visits.Where(v => user.Id == v.IdPatient);
+                }
+            }
+
+            return View(await visits.AsNoTracking().ToListAsync());
+        }
+
+        public string GetUser(string id)
+        {
+            VisitService vs = new VisitService();
+            string toReturn = "";
+            if (patients.Count > 0)
+            {
+                toReturn = vs.GetSpecificUser(id);
+                patients.RemoveAt(0);
+            }
+            //foreach (var patient in patients)
+            //{
+            //    vs.GetSpecificUser(patient.Id);
+            //}
+            return toReturn;
         }
 
         // GET: Visits/Details/5

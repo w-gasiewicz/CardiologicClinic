@@ -19,6 +19,7 @@ namespace CardiologicClinic_WebApp.Controllers
             _context = context;
             _userManager = userManager;
         }
+
         public async Task<IActionResult/*List<ApplicationUser>*/> Search(string sortOrder, string searchString)
         {
             var users = from s in _context.ApplicationUser

@@ -19,7 +19,7 @@
 <form>
     <div class="form-actions no-color">
         <p>
-            Wyszukaj użytkownika po emailu: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            Wyszukaj użytkownika po nazwisku lub imieniu: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
             <input asp-controller="Users" asp-action="Search" method="get" type="submit" value="Szukaj" class="btn btn-default" /> |
             <a asp-page="./UserView">Wróć do pełnej listy użytkowników</a>
         </p>
