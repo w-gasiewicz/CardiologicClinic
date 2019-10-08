@@ -16,6 +16,7 @@ namespace CardiologicClinic_WebApp.Models
         public string VisitName { get; set; }
         [Display(Name = "Cena")]
         public float Price { get; set; }
-
+        [Display(Name = "Notatka lekarza")]
+        public string VisitNote { get; set; }
     }
 }

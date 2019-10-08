@@ -34,6 +34,11 @@
                 <span asp-validation-for="VisitName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="VisitNote" class="control-label"></label>
+                <textarea asp-for="VisitNote" class="form-control" text-wrap:normal" type="text" placeholder="Pole na notatke dotyczącą wizyty"></textarea>
+                <span asp-validation-for="VisitNote" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </form>

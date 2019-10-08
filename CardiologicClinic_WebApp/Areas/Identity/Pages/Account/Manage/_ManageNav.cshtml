@@ -26,6 +26,10 @@
     {
         <li><a asp-controller="Visits" asp-action="Index"><i class="fa fa-user-md"></i> Zarządzaj wizytami</a></li>
     }
+    @if (UserManager.IsInRoleAsync(user, "Doctor").Result || UserManager.IsInRoleAsync(user, "Admin").Result)
+    {
+        <li><a asp-controller="Visits" asp-action="Index"><i class="fa fa-user-md"></i> Moi pacjenci</a></li>
+    }
     <li class="@ManageNavPages.NewVisitNavClass(ViewContext)"><a asp-page="./NewVisit"><i class="fa fa-plus"></i> Umów wizytę</a></li>
     <li class="@ManageNavPages.ToDownloadNavClass(ViewContext)"><a asp-page="./ToDownload"><i class="fa fa-download"></i> Do pobrania</a></li>
 </ul>
