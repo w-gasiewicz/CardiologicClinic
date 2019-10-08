@@ -28,39 +28,31 @@ namespace CardiologicClinic_WebApp.Controllers
 
         public async Task<IActionResult/*List<ApplicationUser>*/> Search(string sortOrder, string searchString)
         {
+            List<Visit> toReturn = new List<Visit>();
             var visits = from s in _context.Visit
-                        select s;
+                         select s;
 
             patients = new List<ApplicationUser>();
             patients = _context.ApplicationUser.ToList();
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                patients.RemoveAll( u => !u.UserName.ToUpper().Contains(searchString.ToUpper()) && !u.UserSurname.ToUpper().Contains(searchString.ToUpper()));
+                patients.RemoveAll(u => !u.UserName.ToUpper().Contains(searchString.ToUpper()) && !u.UserSurname.ToUpper().Contains(searchString.ToUpper()));
 
-                foreach (var user in patients)
+                var visitsList = visits.ToList();
+
+                foreach (var patient in patients)
                 {
-                    visits = visits.Where(v => user.Id == v.IdPatient);
+                    toReturn.AddRange(visitsList.FindAll(v => v.IdPatient == patient.Id));
                 }
             }
-
-            return View(await visits.AsNoTracking().ToListAsync());
+            return View(toReturn);
         }
 
         public string GetUser(string id)
         {
             VisitService vs = new VisitService();
-            string toReturn = "";
-            if (patients.Count > 0)
-            {
-                toReturn = vs.GetSpecificUser(id);
-                patients.RemoveAt(0);
-            }
-            //foreach (var patient in patients)
-            //{
-            //    vs.GetSpecificUser(patient.Id);
-            //}
-            return toReturn;
+            return vs.GetSpecificUser(id);
         }
 
         // GET: Visits/Details/5
