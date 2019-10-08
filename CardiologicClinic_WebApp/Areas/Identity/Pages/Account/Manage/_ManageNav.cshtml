@@ -20,15 +20,12 @@
     <li class="@ManageNavPages.AppointmentCalendarNavClass(ViewContext)"><a asp-page="./AppointmentCalendar"><i class="fa fa-calendar"></i> Kalendarz moich wizyt</a></li>
     @if (UserManager.IsInRoleAsync(user, "Admin").Result)
     {
-        <li><a asp-page="./UserView"><i class="fa fa-user-shield"></i> Zarządzaj użytkownikami</a></li>
+        <li><a asp-page="./UserView"><i class="fa fa-shield"></i> Zarządzaj użytkownikami</a></li>
+        <li class="@ManageNavPages.RaportNavClass(ViewContext)"><a asp-page="./Raports"><i class="fa fa-line-chart"></i> Raporty</a></li>
     }
     @if (UserManager.IsInRoleAsync(user, "Doctor").Result || UserManager.IsInRoleAsync(user, "Admin").Result || UserManager.IsInRoleAsync(user, "Recepcion").Result)
     {
         <li><a asp-controller="Visits" asp-action="Index"><i class="fa fa-user-md"></i> Zarządzaj wizytami</a></li>
-    }
-    @if (UserManager.IsInRoleAsync(user, "Doctor").Result || UserManager.IsInRoleAsync(user, "Admin").Result)
-    {
-        <li><a asp-controller="Visits" asp-action="Index"><i class="fa fa-user-md"></i> Moi pacjenci</a></li>
     }
     <li class="@ManageNavPages.NewVisitNavClass(ViewContext)"><a asp-page="./NewVisit"><i class="fa fa-plus"></i> Umów wizytę</a></li>
     <li class="@ManageNavPages.ToDownloadNavClass(ViewContext)"><a asp-page="./ToDownload"><i class="fa fa-download"></i> Do pobrania</a></li>

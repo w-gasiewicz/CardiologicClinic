@@ -1,7 +1,15 @@
 ﻿@model CardiologicClinic_WebApp.Models.Visit
-
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Edycja wizyty";
+    var user = await UserManager.GetUserAsync(User);
+
+    //if (!UserManager.IsInRoleAsync(user, "Doctor").Result)
+    //{
+    //    FieldAccessException ex = new FieldAccessException();
+    //    throw ex;
+    //}
 }
 
 <h2>Edytuj wizytę</h2>

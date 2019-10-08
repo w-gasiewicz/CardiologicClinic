@@ -53,15 +53,6 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                         Text = doctor.Name + " " + doctor.UserSurname
                     });
                 }
-                
-                //foreach (var patient in Patients)
-                //{
-                //    foreach (var doctor in Doctors)
-                //    {
-                //        if (doctor.Value == patient.Value)
-                //            Patients.Remove(patient);
-                //    }
-                //}
             }
         }
         public string GetSpecificUser(string id)

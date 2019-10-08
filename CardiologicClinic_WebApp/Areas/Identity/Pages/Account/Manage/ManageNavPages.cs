@@ -28,6 +28,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
 
         public static string ToDownload => "ToDownload";
 
+        public static string Raport => "Raports";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
@@ -47,6 +49,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         public static string ToDownloadNavClass(ViewContext viewContext) => PageNavClass(viewContext, ToDownload);
 
         public static string NewVisitNavClass(ViewContext viewContext) => PageNavClass(viewContext, NewVisit);
+
+        public static string RaportNavClass(ViewContext viewContext) => PageNavClass(viewContext, Raport);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

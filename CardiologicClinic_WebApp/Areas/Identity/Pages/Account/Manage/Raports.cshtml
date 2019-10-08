@@ -1,0 +1,84 @@
+﻿@page
+@model RaportsModel
+@{
+    ViewData["Title"] = "Generuj raport";
+    ////public class Raport
+    ////{
+    ////    [DataType(DataType.Date)]
+    ////    [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+    ////    public DateTime DateFrom { get; set; }
+    ////    [DataType(DataType.Date)]
+    ////    [DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+    ////    public DateTime DateTo { get; set; }
+    ////}
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+}
+<h3>Raporty</h3>
+<hr />
+<br />
+@*<h4>1. Przychody z tytułu wizyt</h4>*@
+<form asp-route-returnUrl="@Model.DataOd, @Model.DataDo" method="post">
+    <div class="form-group">
+        <div class='col-md-5' data-date-format="dd-mm-yyyy">
+            <label>Od</label>
+            <input asp-for="@Model.DataOd" class="form-control" type="date" />
+        </div>
+        <div class='col-md-5'>
+            <label>Do</label>
+            <input asp-for="@Model.DataDo" class="form-control" type="date" />
+        </div>
+        <div class='col-md-5'>
+            <button type="submit" class="btn btn-default">Generuj</button>
+        </div>
+    </div>
+</form>
+
+<div class='col-md-7'>
+    <hr />
+    <p>Przychody z tytułu wizyt za wybrany okres: <b> @Model.sum zł </b></p>
+    <p>Ilość odbytych wizyt w wybranym okresie: <b> @Model.qua </b></p>
+    <p>Najbardziej popularny lekarz w wybranym okresie: <b> @Model.mostPopularDoctor </b></p>
+    <p>Ilość odbytych wizyt u @Model.mostPopularDoctor wybranym okresie: <b> @Model.mostPopularDoctorCount </b></p>
+    <hr />
+</div>
+
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

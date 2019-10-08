@@ -17,9 +17,6 @@
             <th>
                 Pacjent
             </th>
-            @*<th>
-                Lekarz
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.VisitDate)
             </th>
@@ -36,9 +33,6 @@
             <td>
                 @vc.GetUser(item.IdPatient)
             </td>
-            @*<td>
-            @vs.GetSpecificUser(item.IdDoctor)
-        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.VisitDate)
             </td>

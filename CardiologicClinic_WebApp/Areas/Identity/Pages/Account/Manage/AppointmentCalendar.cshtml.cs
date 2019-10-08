@@ -56,11 +56,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
                 var visits = await _context.Visit.ToListAsync();
                 var user = await _userManager.GetUserAsync(User);
 
-                foreach (var item in visits)
-                {
-                    if (item.IdPatient != user.Id)
-                        visits.Remove(item);
-                }
+                visits.RemoveAll( v => v.IdPatient != user.Id);
 
                 return visits;
             }
