@@ -7,7 +7,7 @@
 <hr />
 <br />
 @*<h4>1. Przychody z tytułu wizyt</h4>*@
-<form asp-route-returnUrl="@Model.DataOd, @Model.DataDo" method="post">
+<form asp-route-returnUrl="@Model.DataOd, @Model.DataDo, @Model.DataOd.Year" method="post">
     <div class="form-group">
         <div class='col-md-5' data-date-format="dd-mm-yyyy">
             <label>Od</label>
@@ -37,8 +37,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
-<canvas id="bar-chart" width="800" height="450"></canvas>
+<canvas id="bar-chart" width="850" height="450"></canvas>
 <script>
+    var jan = @Html.Raw(Model.jan);
+    var feb = @Html.Raw(Model.feb);
+    var mar = @Html.Raw(Model.mar);
+    var apr = @Html.Raw(Model.apr);
+    var may = @Html.Raw(Model.may);
+    var jun = @Html.Raw(Model.jun);
+    var jul = @Html.Raw(Model.jul);
+    var aug = @Html.Raw(Model.aug);
+    var sep = @Html.Raw(Model.sep);
+    var oct = @Html.Raw(Model.oct);
+    var nov = @Html.Raw(Model.nov);
+    var dec = @Html.Raw(Model.dec);
+    var year = @Html.Raw(Model.Rok);
     new Chart(document.getElementById("bar-chart"), {
         type: 'bar',
         data: {
@@ -47,22 +60,41 @@
                 {
                     label: "Przychody (zł)",
                     backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#0d4225", "#9cdfe6", "#39a375", "#823ebd", "#bd3e71", "#5c5a51", "#c8f542"],
-                    data: [2478, 5267, 734, 784, 433, 1236, 864, 862, 678, 2340, 4567, 3412]
+                    data: [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
                 }
             ]
+        },
+        scales: {
+            xAxes: [{
+                stacked: false,
+                beginAtZero: true,
+                scaleLabel: {
+                    labelString: 'Month'
+                },
+                ticks: {
+                    stepSize: 1,
+                    min: 0,
+                    autoSkip: false
+                }
+            }]
         },
         options: {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Raport przychodów kliniki'
+                text: 'Raport przychodów kliniki za rok: ' + String(year)
             }
+            //options: {
+            //    scales: {
+            //        xAxes: [{ barPercentage: 0.4 }]
+            //    }
+            //}
         }
     });
 </script>
-<form asp-route-returnUrl="@Model.Rok" method="get">
+<form method="get">
         <div class='col-md-2'>
-            Rok <input asp-for="@Model.Rok" type="number" min="1900" max="2099" step="1" value="2019" />
+            Rok <input asp-for="@Model.Rok" type="number" min="1900" max="2099" step="1" @*value="@Model.Rok"*@/>
         </div>
         <div class='col-md-5'>
             <button type="submit" class="btn btn-default">Generuj wykres za wybrany rok</button>
