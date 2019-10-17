@@ -4,6 +4,9 @@ using CardiologicClinic_WebApp.Models;
 using HearAttackRecognition_ML.Models;
 using CardiologicClinic_WebApp.Views.Home;
 using System.IO;
+using Microsoft.Scripting.Hosting;
+using IronPython.Hosting;
+using System;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -82,6 +85,77 @@ namespace CardiologicClinic_WebApp.Controllers
             {
                 wr.WriteLine(predict);
             }
+
+            //ScriptEngine engine = Python.CreateEngine();
+            //var searchPaths = engine.GetSearchPaths();
+            //engine.SetSearchPaths(searchPaths);
+            //searchPaths.Add(@"C:\Users\FUJITSU\Anaconda3\Lib\site-packages\tensorflow\_api\v1\compat\v1\keras");
+            //engine.ExecuteFile("./AI/xd.py");
+
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = @"C:\Users\FUJITSU\PycharmProjects\NIDUC\venv\Scripts\python.exe";
+            start.Arguments = string.Format("./AI/setup.py");
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    int x = 0;
+                }
+            }
+
+            //string fileName = "./AI/xd.py";
+            //Process p = new Process();
+            //p.StartInfo = new ProcessStartInfo(@"C:\Users\FUJITSU\PycharmProjects\NIDUC\venv\Scripts\python.exe", fileName)
+            //{
+            //    RedirectStandardOutput = true
+            //};
+            //p.Start();
+
+            //string output = p.StandardOutput.ReadToEnd();
+            //p.WaitForExit();
+
+            //string outputText = string.Empty;
+            //string standardError = string.Empty;
+            //try
+            //{
+            //    using (Process process = new Process())
+            //    {
+            //        process.StartInfo = new ProcessStartInfo("./AI/xd.py")
+            //        {
+            //            Arguments = "./AI/xd.py",
+            //            UseShellExecute = false,
+            //            RedirectStandardOutput = true,
+            //            RedirectStandardError = true,
+            //            CreateNoWindow = true
+            //        };
+            //        process.Start();
+            //        outputText = process.StandardOutput.ReadToEnd();
+            //        outputText = outputText.Replace(Environment.NewLine, string.Empty);
+            //        standardError = process.StandardError.ReadToEnd();
+            //        process.WaitForExit();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    string exceptionMessage = ex.Message;
+            //}
+            //int x = 0;
+
+            //exe try:
+            //string fileName = "./AI/main.py";
+            //string path = "C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/AI";
+            //Process p = new Process();
+            //ProcessStartInfo startInfo = new ProcessStartInfo();
+            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //startInfo.FileName = "cmd.exe";
+            //startInfo.Arguments = "/c \"python " + path + "\\main.py\"";
+            //p.StartInfo = startInfo;
+            //p.Start();
+            //int x = 0;
+
             //HeartData userData = new HeartData()
             //{
             //    Age = Input.Age,

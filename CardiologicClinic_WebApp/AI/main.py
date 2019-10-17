@@ -21,7 +21,8 @@ def PredictPatientData(model):
     # load input
     data = np.loadtxt('./predict.txt', delimiter=";", dtype=np.int)
     predict = model.predict_classes(np.array([data,]))
-    print(predict)
+    #print(predict)
+    return predict
 
 def DrawPlots(history):    
     # summarize history for accuracy
@@ -65,10 +66,6 @@ def Training():
     X_test = X_test_df.values
     Y_train = Y_train_df.values
     Y_test = Y_test_df.values
-
-#changing values from 1,2,3,4 of illness to 1
-#Y_train[Y_train > 0] = 1
-#Y_test[Y_test > 0] = 1
 
 #casting values to int
     X_train = X_train.astype('int')
@@ -124,7 +121,7 @@ def Training():
         filew.write(str(scores[1]*100)) 
         filew.close()
         Save(model)
-        print("\n Zapisano pomyślnie nowy lepszy model! acc = %.5f%%"(scores[1]*100))
+       # print("\n Zapisano pomyślnie nowy lepszy model! acc = %.5f%%"(scores[1]*100))
 
     tocheck = X_test[0]
     predict = model.predict_classes(np.array([tocheck,]))
@@ -137,9 +134,15 @@ def Training():
     DrawPlots(history)
 
 def main():
-    Training()
-    #model = LoadModel()
-    #PredictPatientData(model)
+    #Training()
+    model = LoadModel()
+    result = PredictPatientData(model)
+
+    filew = open("output.txt","w") 
+    filew.write(str(result[0])) 
+    filew.close()
+
+    print (str(result[0]))
 
 if __name__ == "__main__":
     main()
