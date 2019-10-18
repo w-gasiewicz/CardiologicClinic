@@ -1,2 +1,3 @@
-print (0)
-#k=input("press close to exit") 
+filew = open("test.txt","w") 
+filew.write(str(2345678)) 
+filew.close() 

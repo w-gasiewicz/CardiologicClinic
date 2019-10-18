@@ -20,7 +20,8 @@ def LoadModel():
 def PredictPatientData(model):    
     # load input
     data = np.loadtxt('./predict.txt', delimiter=";", dtype=np.int)
-    predict = model.predict_classes(np.array([data,]))
+    predict = model.predict_classes(np.array([data,]))  
+    #predict2 = model.predict(np.array([data,]))  
     #print(predict)
     return predict
 
@@ -105,14 +106,13 @@ def Training():
 # evaluate the model
 # acc = number of correct pred / total num of pred
     scores = model.evaluate(X_test, Y_test)
-    print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
-
     print(model.summary())
+    print("\n%s: %.7f%%" % (model.metrics_names[1], scores[1]*100))
 
 #check model acc and save
     filer = open("bestacc.txt","r") 
     actualResult = filer.read()
-    print("\n test: %s"%(actualResult))
+    print("\n aktualny najlepszy model: %s"%(actualResult))
     filer.close()
     aRF = float(actualResult)
     
@@ -121,28 +121,20 @@ def Training():
         filew.write(str(scores[1]*100)) 
         filew.close()
         Save(model)
-       # print("\n Zapisano pomyślnie nowy lepszy model! acc = %.5f%%"(scores[1]*100))
-
-    tocheck = X_test[0]
-    predict = model.predict_classes(np.array([tocheck,]))
-    print(predict)
-    tocheck = X_test[2]
-    predict = model.predict_classes(np.array([tocheck,]))
-    print(predict)
+        print("Zapisano pomyślnie nowy lepszy model! acc = %.7f%%"(scores[1]*100))
 
     PredictPatientData(model)
-    DrawPlots(history)
+    #DrawPlots(history)
 
 def main():
-    #Training()
-    model = LoadModel()
-    result = PredictPatientData(model)
+    Training()
+    #model = LoadModel()
+    #result = PredictPatientData(model)
 
-    filew = open("output.txt","w") 
-    filew.write(str(result[0])) 
-    filew.close()
-
-    print (str(result[0]))
+    #filew = open("output.txt","w") 
+    #filew.write(str(result[0])) 
+    #filew.close()
+    #print (str(result[0]))
 
 if __name__ == "__main__":
     main()
