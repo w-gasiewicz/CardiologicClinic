@@ -22,6 +22,7 @@
     {
         <li><a asp-page="./UserView"><i class="fa fa-shield"></i> Zarządzaj użytkownikami</a></li>
         <li class="@ManageNavPages.RaportNavClass(ViewContext)"><a asp-page="./Raports"><i class="fa fa-line-chart"></i> Raporty</a></li>
+        <li class="@ManageNavPages.ModulManagementNavClass(ViewContext)"><a asp-page="./ModulManagement"><i class="fa fa-cog"></i> Zarządzanie modułem diagnostycznym</a></li>
     }
     @if (UserManager.IsInRoleAsync(user, "Doctor").Result || UserManager.IsInRoleAsync(user, "Admin").Result || UserManager.IsInRoleAsync(user, "Recepcion").Result)
     {

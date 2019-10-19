@@ -1,12 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CardiologicClinic_WebApp.Models;
-using HearAttackRecognition_ML.Models;
 using CardiologicClinic_WebApp.Views.Home;
 using System.IO;
-using Microsoft.Scripting.Hosting;
-using IronPython.Hosting;
 using System;
+using CardiologicClinic_WebApp.AI;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -64,6 +62,7 @@ namespace CardiologicClinic_WebApp.Controllers
 
         public IActionResult Diagnosis(HeartAttackModel.InputModel Input)
         {
+            ManagementAI ai = new ManagementAI();
             string predict = Input.Age.ToString() + ";" + (Input.Sex ? 1 : 0).ToString() + ";" + Input.PainLocation.ToString() + ";" + Input.ChestPainRadiation.ToString()
                 + ";" + Input.PainCharacter.ToString() + ";" + Input.OnsetOfPain.ToString() + ";" + Input.NumOfHoursSinceOnset.ToString()
                 + ";" + Input.DurationOfTheLastEpisode.ToString() + ";" + (Input.Nausea ? 1 : 0).ToString() + ";" + (Input.Diaphoresis ? 1 : 0).ToString()
@@ -86,15 +85,19 @@ namespace CardiologicClinic_WebApp.Controllers
                 wr.WriteLine(predict);
             }
 
-            string fileName = "C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/AI/main.py";
-            Process p = new Process();
-            p.StartInfo = new ProcessStartInfo(@"C:/Users/FUJITSU/AppData/Local/Programs/Python/Python37/python.exe", fileName);
-            p.StartInfo.WorkingDirectory = "C:/Users/FUJITSU/source/repos/CardiologicClinic_WebApp/CardiologicClinic_WebApp/AI";
-            p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            p.Start();
-            p.WaitForExit();
-            p.Close();
+            ai.Predict();
 
+            string outData;
+            using (StreamReader wr = new StreamReader("./AI/output.txt"))
+            {
+                outData=wr.ReadLine();
+            }
+            string[] tokens = outData.Split(';');
+            //fill result to display
+            HeartAttackModel.illness = Convert.ToInt32(tokens[0]);
+            tokens[1] = tokens[1].Replace('.',',');
+            HeartAttackModel.result = Convert.ToSingle(tokens[1]);
+            HeartAttackModel.result = Convert.ToSingle(Math.Round(HeartAttackModel.result, 2));
             return View();
         }
     }

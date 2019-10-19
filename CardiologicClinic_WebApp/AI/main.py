@@ -21,9 +21,10 @@ def PredictPatientData(model):
     # load input
     data = np.loadtxt('./predict.txt', delimiter=";", dtype=np.int)
     predict = model.predict_classes(np.array([data,]))  
-    #predict2 = model.predict(np.array([data,]))  
-    #print(predict)
-    return predict
+    pro=model.predict_proba(np.array([data,]))
+    #print(pro[0,predict[0]]*100)
+    toreturn = str(predict[0])+";"+str(pro[0,predict[0]]*100)
+    return toreturn
 
 def DrawPlots(history):    
     # summarize history for accuracy
@@ -46,10 +47,6 @@ def DrawPlots(history):
 def Training():
 #read data
     data = pd.read_csv("./danecsvintH.csv", sep=";")
-
-#delete rows with missing data
-#data = data[data.ca != '?']
-#data = data[data.thal != '?']
 
 #split data to training and test set (80-20)
     X_train_df, X_test_df = train_test_split(data, test_size=0.2, shuffle=True)
@@ -88,7 +85,7 @@ def Training():
 #model.add(Dense(5, activation='relu'))
 #model.add(Dense(5, activation='relu'))
 #model.add(Dense(1, activation='sigmoid'))
-    model.add(Dense(5, activation='sigmoid'))
+    model.add(Dense(5, activation='softmax'))
 
 #optymalizer settings, in this examlpe we changed default learning rate
     adam = optimizers.Adam(lr=0.002)
@@ -121,20 +118,20 @@ def Training():
         filew.write(str(scores[1]*100)) 
         filew.close()
         Save(model)
-        print("Zapisano pomyślnie nowy lepszy model! acc = %.7f%%"(scores[1]*100))
+        print("Zapisano pomyślnie nowy lepszy model! acc = "+str(scores[1]*100))
 
     PredictPatientData(model)
     #DrawPlots(history)
 
 def main():
-    Training()
-    #model = LoadModel()
-    #result = PredictPatientData(model)
+    #Training()
+    model = LoadModel()
+    result = PredictPatientData(model)
 
-    #filew = open("output.txt","w") 
-    #filew.write(str(result[0])) 
-    #filew.close()
-    #print (str(result[0]))
+    filew = open("output.txt","w") 
+    filew.write(str(result)) 
+    filew.close()
+    print (str(result))
 
 if __name__ == "__main__":
     main()

@@ -1,20 +1,32 @@
 ﻿@model HeartAttackModel
 @{
     ViewData["Title"] = "Diagnoza";
-    HeartAttackModel.result = HeartAttackModel.result * 100;
 }
 @using CardiologicClinic_WebApp.Views.Home
 
 <h2>Diagnoza:</h2>
+<hr />
 <ul>
+    @if (HeartAttackModel.illness == 0)
+    {
+        <h4>Ból nie jest związany z sercem.</h4>
+    }
+    @if (HeartAttackModel.illness == 1)
+    {
+        <h4>Zawał serca przezścienny.</h4>
+    }
+    @if (HeartAttackModel.illness == 2)
+    {
+        <h4>Zawał serca podwsierdziowy.</h4>
+    }
+    @if (HeartAttackModel.illness == 3)
+    {
+        <h4>Choroba niedokrwienna serca.</h4>
+    }
+    @if (HeartAttackModel.illness == 4)
+    {
+        <h4>Choroba niedokrwienna serca (Prinzmetala).</h4>
+    }
     <h4>Prawdopodobieństwo: @HeartAttackModel.result.ToString() %</h4>
-    @if (HeartAttackModel.isIll)
-    {
-        <h4>Badany pacjent jest chory z podanym prawdopodobieństwem.</h4>
-    }
-    @if (!HeartAttackModel.isIll)
-    {
-        <h4>Badany pacjent nie jest chory z podanym prawdopodobieństwem.</h4>
-    }
 </ul>
 

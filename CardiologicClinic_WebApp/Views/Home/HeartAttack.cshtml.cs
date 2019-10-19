@@ -16,7 +16,7 @@ namespace CardiologicClinic_WebApp.Views.Home
         public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
 
         public static float result;
-        public static bool isIll;
+        public static int illness;
 
         public class InputModel
         {

@@ -11,7 +11,6 @@ namespace CardiologicClinic_WebApp.Controllers
 {
     public class RoleController : Controller
     {
-        IHttpContextAccessor httpContextAccessor;
         private readonly RoleManager<IdentityRole> _roleManager;
         public RoleController(RoleManager<IdentityRole> roleManager)
         {

@@ -1,0 +1,20 @@
+﻿@page
+@model ModulManagementModel
+@using CardiologicClinic_WebApp.AI;
+@{
+    ViewData["Title"] = "Zarządzanie modułem diagnostycznym";
+    ManagementAI ai = new ManagementAI();
+    <script type="text/javascript" src="~/js/site.js"></script>
+}
+<h3>Zarządzanie modułem diagnostycznym</h3>
+<hr />
+<p>Obecna skuteczność modelu: @ai.GetActualAcc()%</p>
+
+<h3>WYKRESY</h3>
+<form class="form-inline">
+    <div class="form-group row">
+        <label>Ilość iteracji</label>
+        <input @*asp-for="@Model.DataDo" *@ class="form-control" type="number" />
+        <button class="btn btn-default" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Trening modelu">Trenuj</button>
+    </div>
+</form>
