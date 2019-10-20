@@ -13,28 +13,17 @@ from keras import optimizers
 def Save(model):
     model.save('medical_module.h5')
 
-def LoadModel():
-    model = load_model('medical_module.h5')
-    return model
-
-def PredictPatientData(model):    
-    # load input
-    data = np.loadtxt('./predict.txt', delimiter=";", dtype=np.int)
-    predict = model.predict_classes(np.array([data,]))  
-    pro=model.predict_proba(np.array([data,]))
-    #print(pro[0,predict[0]]*100)
-    toreturn = str(predict[0])+";"+str(pro[0,predict[0]]*100)
-    return toreturn
-
-def DrawPlots(history):    
+def DrawPlots(history): 
     # summarize history for accuracy
     plt.plot(history.history['accuracy'])
-    plt.plot(history.history['val_acc'])
+    plt.plot(history.history['val_accuracy'])
     plt.title('model accuracy')
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+    plt.savefig('../wwwroot/images/acc.png')
+    #plt.show()
+    
     # summarize history for loss
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
@@ -42,7 +31,8 @@ def DrawPlots(history):
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+    plt.savefig('../wwwroot/images/loss.png')
+    #plt.show()
 
 def Training():
 #read data
@@ -74,17 +64,11 @@ def Training():
 # create model
     model = Sequential()
 
-# records events into a History object
-    history = History()
-
 #layers of the model
 # relu -> activation(x) = max(0,x)
     model.add(Dense(13, input_dim=59, activation='relu'))
     model.add(Dense(8, activation='relu'))
     model.add(Dense(8, activation='relu'))
-#model.add(Dense(5, activation='relu'))
-#model.add(Dense(5, activation='relu'))
-#model.add(Dense(1, activation='sigmoid'))
     model.add(Dense(5, activation='softmax'))
 
 #optymalizer settings, in this examlpe we changed default learning rate
@@ -93,12 +77,10 @@ def Training():
 #configurate model and picking optymalizer, loss function and metrics.
     model.compile(loss='sparse_categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 
-# Start learning
 # batch_size is number of samples per gradient update
 # epoch is an iteration over the entire data provided
 #fit - train data
-
-    model.fit(X_train, Y_train, epochs=150, batch_size=10, callbacks=[history])
+    history = model.fit(X_train, Y_train, epochs=150, batch_size=10, validation_data=(X_test, Y_test))
 
 # evaluate the model
 # acc = number of correct pred / total num of pred
@@ -119,19 +101,10 @@ def Training():
         filew.close()
         Save(model)
         print("Zapisano pomyślnie nowy lepszy model! acc = "+str(scores[1]*100))
-
-    PredictPatientData(model)
-    #DrawPlots(history)
+        DrawPlots(history)
 
 def main():
-    #Training()
-    model = LoadModel()
-    result = PredictPatientData(model)
-
-    filew = open("output.txt","w") 
-    filew.write(str(result)) 
-    filew.close()
-    print (str(result))
+    Training()
 
 if __name__ == "__main__":
     main()

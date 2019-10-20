@@ -10,11 +10,35 @@
 <hr />
 <p>Obecna skuteczność modelu: @ai.GetActualAcc()%</p>
 
-<h3>WYKRESY</h3>
-<form class="form-inline">
+<h3>Wykresy</h3>
+<center>
+    <img src="~/images/acc.png" />
+    <hr />
+    <img src="~/images/loss.png" />
+    <hr />
+</center>
+<h3>Trening</h3>
+<form class="form-inline" method="get">
     <div class="form-group row">
         <label>Ilość iteracji</label>
-        <input @*asp-for="@Model.DataDo" *@ class="form-control" type="number" />
+        <input asp-for="@Model.iterations" class="form-control" />
         <button class="btn btn-default" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Trening modelu">Trenuj</button>
     </div>
 </form>
+
+@if (Model.result > 0)
+{
+    @*<script>
+            var x1 = @Model.result.ToString();
+            var x2 = @ai.GetActualAcc();
+            alert("S")
+        </script>*@
+
+    <hr />
+    <p>W wyniku treningu skuteczność modelu została poprawiona o: @Model.result.ToString()%</p>
+    <p>Nowa skuteczność modelu: @ai.GetActualAcc()%</p>
+}
+@if (Model.result == 0)
+{
+    <p>Trenowanie modelu nie przyczyniło się do jego poprawy.</p>
+}
