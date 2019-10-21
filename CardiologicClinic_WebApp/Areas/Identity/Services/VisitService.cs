@@ -63,7 +63,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
             {
                 var User = _context.ApplicationUser.FirstOrDefault(u => u.Id == id);
-                return  User.Name + " " + User.UserSurname;
+                return User.Name + " " + User.UserSurname;
             }
         }
         public VisitService()

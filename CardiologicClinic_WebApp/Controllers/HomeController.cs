@@ -90,12 +90,12 @@ namespace CardiologicClinic_WebApp.Controllers
             string outData;
             using (StreamReader wr = new StreamReader("./AI/output.txt"))
             {
-                outData=wr.ReadLine();
+                outData = wr.ReadLine();
             }
             string[] tokens = outData.Split(';');
             //fill result to display
             HeartAttackModel.illness = Convert.ToInt32(tokens[0]);
-            tokens[1] = tokens[1].Replace('.',',');
+            tokens[1] = tokens[1].Replace('.', ',');
             HeartAttackModel.result = Convert.ToSingle(tokens[1]);
             HeartAttackModel.result = Convert.ToSingle(Math.Round(HeartAttackModel.result, 2));
             return View();

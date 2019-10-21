@@ -14,7 +14,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
         public DateTime DataOd = DateTime.Now.Date.AddMonths(-1);
         public DateTime DataDo = DateTime.Now.Date;
         public int Rok; /*{ get; set; }*/
-        public float jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec = 0;
+        public float jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec = 0;
         public float sum;
         public int qua;
         public string mostPopularDoctor;
@@ -59,8 +59,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
             DateTime.TryParseExact(rok.ToString(), "yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate);
             var endDate = new DateTime(startDate.Year, 12, 31);
 
-           DataOd = startDate;
-           DataDo = endDate;
+            DataOd = startDate;
+            DataDo = endDate;
 
             helper = startDate.AddMonths(1);
 
@@ -101,7 +101,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
                 }
                 else if (x == 4)
                 {
-                    foreach(var visit in actualMonth)
+                    foreach (var visit in actualMonth)
                     {
                         may += visit.Price;
                     }

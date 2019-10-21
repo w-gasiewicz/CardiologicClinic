@@ -23,14 +23,14 @@ namespace CardiologicClinic_WebApp.Controllers
         public async Task<IActionResult/*List<ApplicationUser>*/> Search(string sortOrder, string searchString)
         {
             var users = from s in _context.ApplicationUser
-                           select s;
+                        select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 users = users.Where(s => s.UserSurname.Contains(searchString)
                                        || s.Name.Contains(searchString));
             }
 
-            return View (await users.AsNoTracking().ToListAsync());
+            return View(await users.AsNoTracking().ToListAsync());
         }
         // GET: Users/Details/5
         public async Task<IActionResult> Details(string id)
@@ -48,7 +48,7 @@ namespace CardiologicClinic_WebApp.Controllers
             }
 
             return View(user);
-        } 
+        }
         // GET: Users/Details/5
         public async Task<IActionResult> DoctorDetails(string id)
         {
@@ -203,7 +203,7 @@ namespace CardiologicClinic_WebApp.Controllers
             var user = await _context.ApplicationUser.FindAsync(id);
             _context.ApplicationUser.Remove(user);
             await _context.SaveChangesAsync();
-            return Redirect("/Identity/Account/Manage/UserView"); 
+            return Redirect("/Identity/Account/Manage/UserView");
         }
 
         private bool UserExists(string id)
