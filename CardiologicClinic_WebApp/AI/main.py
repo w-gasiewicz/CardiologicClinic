@@ -2,6 +2,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.callbacks import History
 from keras.models import load_model
+from keras.utils import plot_model
 import numpy as np
 import matplotlib.pyplot as plt
 # fix random seed for reproducibility
@@ -23,7 +24,7 @@ def DrawPlots(history):
     plt.legend(['train', 'test'], loc='upper left')
     plt.savefig('../wwwroot/images/acc.png')
     #plt.show()
-    
+
     # summarize history for loss
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
@@ -94,7 +95,11 @@ def Training():
     print("\n aktualny najlepszy model: %s"%(actualResult))
     filer.close()
     aRF = float(actualResult)
-    
+
+    import os
+    os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+    plot_model(model, show_shapes=True, show_layer_names=True, to_file='model.png')
+
     if(aRF < scores[1]*100):
         filew = open("bestacc.txt","w") 
         filew.write(str(scores[1]*100)) 
