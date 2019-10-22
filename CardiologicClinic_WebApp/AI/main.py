@@ -41,7 +41,7 @@ def Training():
 #read data
     #data = pd.read_csv("./danecsvintH.csv", sep=";")
     my_data = genfromtxt('danecsvintH.csv', delimiter=';')
-    test = feat_select.SelectKBest(score_func=feat_select.chi2, k=10)
+    test = feat_select.SelectKBest(score_func=feat_select.chi2, k=51)
     X = my_data[1:, 0:59].astype('int')
     Y = my_data[1:, 59].astype('int')
     data = test.fit_transform(X, Y)
@@ -54,34 +54,21 @@ def Training():
     train_df, test_df = train_test_split(data, test_size=0.2, shuffle=True)
 
 #creating output classes
-    Y_train_df = train_df[:,len(train_df[0])-1]
-    Y_test_df = test_df[:,len(test_df[0])-1]
+    Y_train = train_df[:,len(train_df[0])-1]
+    Y_test = test_df[:,len(test_df[0])-1]
 
 #deleting output classes from training data
-    X_train_df = train_df[:,0:len(train_df[0])-1]
-    X_test_df = test_df[:,0:len(test_df[0])-1]
-
-#converting from datafram to numpy array
-    X_train = X_train_df#.values
-    X_test = X_test_df#.values
-    Y_train = Y_train_df#.values
-    Y_test = Y_test_df#.values
-
-#casting values to int
-    #X_train = X_train.astype('int')
-    #X_test = X_test.astype('int')
-    #Y_train = Y_train.astype('int')
-    #Y_test = Y_test.astype('int')
+    X_train = train_df[:,0:len(train_df[0])-1]
+    X_test = test_df[:,0:len(test_df[0])-1]
 
 # create model
     model = Sequential()
 
 #layers of the model
 # relu -> activation(x) = max(0,x)
-    model.add(Dense(10, input_dim=len(X_train[0]), activation='relu'))
-    model.add(Dense(20, activation='relu'))
-    model.add(Dense(10, activation='relu'))
-    model.add(Dense(5, activation='relu'))
+    model.add(Dense(13, input_dim=len(X_train[0]), activation='relu'))
+    model.add(Dense(8, activation='relu'))
+    model.add(Dense(8, activation='relu'))
     model.add(Dense(5, activation='softmax'))
 
 #optymalizer settings, in this examlpe we changed default learning rate
@@ -93,7 +80,7 @@ def Training():
 # batch_size is number of samples per gradient update
 # epoch is an iteration over the entire data provided
 #fit - train data
-    history = model.fit(X_train, Y_train, epochs=150, batch_size=10, validation_data=(X_test, Y_test))
+    history = model.fit(X_train, Y_train, epochs=200, batch_size=10, validation_data=(X_test, Y_test))
 
 # evaluate the model
 # acc = number of correct pred / total num of pred
