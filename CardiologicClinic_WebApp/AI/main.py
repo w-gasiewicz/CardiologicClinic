@@ -4,7 +4,9 @@ from keras.callbacks import History
 from keras.models import load_model
 from keras.utils import plot_model
 import numpy as np
+import sklearn.feature_selection as feat_select
 import matplotlib.pyplot as plt
+from numpy import genfromtxt
 # fix random seed for reproducibility
 np.random.seed(7)
 import pandas as pd
@@ -37,39 +39,49 @@ def DrawPlots(history):
 
 def Training():
 #read data
-    data = pd.read_csv("./danecsvintH.csv", sep=";")
-
+    #data = pd.read_csv("./danecsvintH.csv", sep=";")
+    my_data = genfromtxt('danecsvintH.csv', delimiter=';')
+    test = feat_select.SelectKBest(score_func=feat_select.chi2, k=10)
+    X = my_data[1:, 0:59].astype('int')
+    Y = my_data[1:, 59].astype('int')
+    data = test.fit_transform(X, Y)
+    res = []
+    for i in range(len(Y)):
+        res.append([Y[i]])
+    Y = res
+    data = np.append(data, Y, axis=1)
 #split data to training and test set (80-20)
-    X_train_df, X_test_df = train_test_split(data, test_size=0.2, shuffle=True)
+    train_df, test_df = train_test_split(data, test_size=0.2, shuffle=True)
 
 #creating output classes
-    Y_train_df = X_train_df['num']
-    Y_test_df = X_test_df['num']
+    Y_train_df = train_df[:,len(train_df[0])-1]
+    Y_test_df = test_df[:,len(test_df[0])-1]
 
 #deleting output classes from training data
-    X_train_df = X_train_df.drop(['num'], axis = 1)
-    X_test_df = X_test_df.drop(['num'], axis = 1)
+    X_train_df = train_df[:,0:len(train_df[0])-1]
+    X_test_df = test_df[:,0:len(test_df[0])-1]
 
 #converting from datafram to numpy array
-    X_train = X_train_df.values
-    X_test = X_test_df.values
-    Y_train = Y_train_df.values
-    Y_test = Y_test_df.values
+    X_train = X_train_df#.values
+    X_test = X_test_df#.values
+    Y_train = Y_train_df#.values
+    Y_test = Y_test_df#.values
 
 #casting values to int
-    X_train = X_train.astype('int')
-    X_test = X_test.astype('int')
-    Y_train = Y_train.astype('int')
-    Y_test = Y_test.astype('int')
+    #X_train = X_train.astype('int')
+    #X_test = X_test.astype('int')
+    #Y_train = Y_train.astype('int')
+    #Y_test = Y_test.astype('int')
 
 # create model
     model = Sequential()
 
 #layers of the model
 # relu -> activation(x) = max(0,x)
-    model.add(Dense(13, input_dim=59, activation='relu'))
-    model.add(Dense(8, activation='relu'))
-    model.add(Dense(8, activation='relu'))
+    model.add(Dense(10, input_dim=len(X_train[0]), activation='relu'))
+    model.add(Dense(20, activation='relu'))
+    model.add(Dense(10, activation='relu'))
+    model.add(Dense(5, activation='relu'))
     model.add(Dense(5, activation='softmax'))
 
 #optymalizer settings, in this examlpe we changed default learning rate
@@ -96,16 +108,15 @@ def Training():
     filer.close()
     aRF = float(actualResult)
 
-    import os
-    os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
-    plot_model(model, show_shapes=True, show_layer_names=True, to_file='model.png')
-
     if(aRF < scores[1]*100):
         filew = open("bestacc.txt","w") 
         filew.write(str(scores[1]*100)) 
         filew.close()
         Save(model)
         print("Zapisano pomyślnie nowy lepszy model! acc = "+str(scores[1]*100))
+        import os
+        os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+        plot_model(model, show_shapes=True, show_layer_names=True, to_file='model.png')
         DrawPlots(history)
 
 def main():

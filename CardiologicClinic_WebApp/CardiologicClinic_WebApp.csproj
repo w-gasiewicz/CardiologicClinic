@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.ML" Version="1.2.0" />
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="particles.js" Version="2.0.0" />
     <PackageReference Include="Timeline" Version="2.0.2.41912" />
   </ItemGroup>
   
