@@ -38,11 +38,11 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
             public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             [Display(Name = "Zapamiętaj dane")]

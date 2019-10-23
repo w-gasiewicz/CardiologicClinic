@@ -195,9 +195,9 @@ if (typeof jQuery === 'undefined') {
 
   Button.VERSION  = '3.4.1'
 
-  Button.DEFAULTS = {
-    loadingText: 'loading...'
-  }
+  //Button.DEFAULTS = {
+  //  loadingText: 'loading...'
+  //}
 
   Button.prototype.setState = function (state) {
     var d    = 'disabled'

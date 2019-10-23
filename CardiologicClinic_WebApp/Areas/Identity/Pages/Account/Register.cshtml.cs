@@ -40,8 +40,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
             [Display(Name = "Email")]
+            [EmailAddress(ErrorMessage = "To nie jest poprawny adres email.")]
             public string Email { get; set; }
 
             [Required]

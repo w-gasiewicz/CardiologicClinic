@@ -41,12 +41,12 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "Adres email jest wymagany.")]
+            [EmailAddress(ErrorMessage = "To nie jest poprawny adres email.")]
             public string Email { get; set; }
 
-            [Phone]
             [Display(Name = "Numer telefonu")]
+            [Phone(ErrorMessage = "Niepoprawny numer telefonu.")]
             public string PhoneNumber { get; set; }
         }
 

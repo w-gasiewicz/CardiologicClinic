@@ -1,0 +1,55 @@
+﻿@model CardiologicClinic_WebApp.Models.Visit
+@using CardiologicClinic_WebApp.Areas.Identity.Services
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Zapisz się na wizytę";
+    VisitService vs = new VisitService();
+    await vs.GetUsers(UserManager);
+}
+
+<h2>Zapisz się na wizytę</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="IdPatient" class="control-label"></label>
+                <select asp-for="IdPatient" asp-items="VisitService.Patients"></select>
+                <span asp-validation-for="IdPatient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdDoctor" class="control-label"></label>
+                <select asp-for="IdDoctor" asp-items="VisitService.Doctors"></select>
+                <span asp-validation-for="IdDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitName" class="control-label"></label>
+                <input asp-for="VisitName" class="form-control" />
+                <span asp-validation-for="VisitName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Stwórz" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href='javascript:history.go(-1)'>Powrót do menu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
