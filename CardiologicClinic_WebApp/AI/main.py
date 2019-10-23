@@ -27,6 +27,7 @@ def DrawPlots(history):
     plt.savefig('../wwwroot/images/acc.png')
     #plt.show()
 
+    plt.clf()
     # summarize history for loss
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
