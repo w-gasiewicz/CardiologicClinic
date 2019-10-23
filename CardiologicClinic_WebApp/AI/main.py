@@ -39,9 +39,9 @@ def DrawPlots(history):
 
 def Training():
 #read data
-    #data = pd.read_csv("./danecsvintH.csv", sep=";")
+    #data = pd.read_csv("danecsvintH.csv", sep=";")
     my_data = genfromtxt('danecsvintH.csv', delimiter=';')
-    test = feat_select.SelectKBest(score_func=feat_select.chi2, k=51)
+    test = feat_select.SelectKBest(score_func=feat_select.chi2, k='all')
     X = my_data[1:, 0:59].astype('int')
     Y = my_data[1:, 59].astype('int')
     data = test.fit_transform(X, Y)
@@ -69,18 +69,16 @@ def Training():
     model.add(Dense(13, input_dim=len(X_train[0]), activation='relu'))
     model.add(Dense(8, activation='relu'))
     model.add(Dense(8, activation='relu'))
+    model.add(Dense(5, activation='relu'))
     model.add(Dense(5, activation='softmax'))
 
 #optymalizer settings, in this examlpe we changed default learning rate
-    adam = optimizers.Adam(lr=0.002)
+    adam = optimizers.Adam(lr=0.0022)
 
 #configurate model and picking optymalizer, loss function and metrics.
     model.compile(loss='sparse_categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 
-# batch_size is number of samples per gradient update
-# epoch is an iteration over the entire data provided
-#fit - train data
-    history = model.fit(X_train, Y_train, epochs=200, batch_size=10, validation_data=(X_test, Y_test))
+    history = model.fit(X_train, Y_train, epochs=300, batch_size=12, validation_data=(X_test, Y_test))
 
 # evaluate the model
 # acc = number of correct pred / total num of pred
