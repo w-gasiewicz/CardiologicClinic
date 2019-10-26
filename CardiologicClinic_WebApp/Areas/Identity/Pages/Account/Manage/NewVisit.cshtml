@@ -40,7 +40,7 @@
                 var name = item.Name + " " + item.UserSurname + " ";
                 <center>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">@name<span class="glyphicon glyphicon-user pull-right" style="color:black"></span></a>
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:black">@name<span class="fa fa-user-md" style="color:black"></span></a>
                         <ul class="dropdown-menu">
                             <li><a asp-controller="Visits" asp-action="AssignToVisit" asp-route-id="@item.Id" style="color:black">Umów wizytę <span class="glyphicon glyphicon-plus pull-right" style="color:black"></span></a></li>
                             <li class="divider"></li>

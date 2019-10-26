@@ -18,6 +18,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
 
         public static List<SelectListItem> Patients { get; set; }
         public static List<SelectListItem> Doctors { get; set; }
+        public static List<SelectListItem> Visits { get; set; }
 
         public async System.Threading.Tasks.Task GetUsers(UserManager<ApplicationUser> _um)
         {
@@ -55,6 +56,23 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                 }
             }
         }
+        public async System.Threading.Tasks.Task GetVisits(UserManager<ApplicationUser> _um, string doctorId)
+        {
+            Visits = new List<SelectListItem>();
+
+            _connectionString = GetConnectionString();
+            _optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            _optionsBuilder.UseSqlServer(_connectionString);
+            using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
+            {
+                Visits = _context.Visit.Where(a=> a.IdDoctor == doctorId && a.IdPatient == null).Select(a =>
+                          new SelectListItem
+                          {
+                              Value = a.Id.ToString(),
+                              Text = a.VisitDate.ToShortDateString() + " " + a.VisitDate.ToShortTimeString()
+                          }).ToList();
+            }
+        }
         public string GetSpecificUser(string id)
         {
             _connectionString = GetConnectionString();
@@ -62,6 +80,8 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
             _optionsBuilder.UseSqlServer(_connectionString);
             using (ApplicationDbContext _context = new ApplicationDbContext(_optionsBuilder.Options))
             {
+                if (id == "")
+                    return "";
                 var User = _context.ApplicationUser.FirstOrDefault(u => u.Id == id);
                 return User.Name + " " + User.UserSurname;
             }

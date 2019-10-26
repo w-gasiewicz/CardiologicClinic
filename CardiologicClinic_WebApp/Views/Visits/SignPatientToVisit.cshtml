@@ -1,0 +1,17 @@
+﻿@model CardiologicClinic_WebApp.Models.Visit
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Zapisano na wizytę";
+}
+
+<h2>Zapis na wizytę został pomyślnie wykonany</h2>
+<hr/>
+
+<div>
+    <a href="/Identity/Account/Manage">Powrót do menu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

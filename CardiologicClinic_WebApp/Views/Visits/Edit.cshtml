@@ -1,15 +1,12 @@
 ﻿@model CardiologicClinic_WebApp.Models.Visit
 @using Microsoft.AspNetCore.Identity;
+@using CardiologicClinic_WebApp.Areas.Identity.Services
 @inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Edycja wizyty";
     var user = await UserManager.GetUserAsync(User);
-
-    //if (!UserManager.IsInRoleAsync(user, "Doctor").Result)
-    //{
-    //    FieldAccessException ex = new FieldAccessException();
-    //    throw ex;
-    //}
+    VisitService vs = new VisitService();
+    await vs.GetUsers(UserManager);
 }
 
 <h2>Edytuj wizytę</h2>
@@ -19,16 +16,15 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="IdPatient" class="control-label"></label>
-                <input asp-for="IdPatient" class="form-control" />
+                <select asp-for="IdPatient" asp-items="VisitService.Patients"></select>
                 <span asp-validation-for="IdPatient" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdDoctor" class="control-label"></label>
-                <input asp-for="IdDoctor" class="form-control" />
+                <select asp-for="IdDoctor" asp-items="VisitService.Doctors"></select>
                 <span asp-validation-for="IdDoctor" class="text-danger"></span>
             </div>
             <div class="form-group">

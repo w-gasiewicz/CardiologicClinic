@@ -8,6 +8,7 @@
     await vs.GetUsers(UserManager);
     var x = Context.Request.HttpContext.Request.Path.ToString();
     x = x.Remove(0,22);
+    await vs.GetVisits(UserManager, x);    
 }
 
 <h2>Zapisujesz się na wizytę do lekarza<b> @vs.GetSpecificUser(x)</b></h2>
@@ -15,10 +16,10 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="SignPatientToVisit">
             <div class="form-group">
                 <label class="control-label">Dostępne terminy wizyt</label>
-                <select asp-for="IdPatient" asp-items="VisitService.Patients"></select>
+                <select asp-for="Id" asp-items="VisitService.Visits"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Umów wizytę" class="btn btn-default" />

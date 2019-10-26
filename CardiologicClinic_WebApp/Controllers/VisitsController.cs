@@ -7,6 +7,7 @@ using CardiologicClinic_WebApp.Models;
 using System;
 using System.Collections.Generic;
 using CardiologicClinic_WebApp.Areas.Identity.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace CardiologicClinic_WebApp.Controllers
 {
@@ -15,10 +16,12 @@ namespace CardiologicClinic_WebApp.Controllers
         public static List<ApplicationUser> patients;
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public VisitsController(ApplicationDbContext context)
+        public VisitsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _context = context;
+            _userManager = userManager;
         }
         // GET: Visits
         public async Task<IActionResult> Index()
@@ -82,6 +85,25 @@ namespace CardiologicClinic_WebApp.Controllers
         public IActionResult AssignToVisit()
         {
             return View();
+        }
+
+        public async Task<IActionResult> SignPatientToVisit(Visit visit)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var visitToEdit = _context.Visit.FirstOrDefault(v => v.Id == visit.Id);
+
+                if (visitToEdit == null)
+                {
+                    return Redirect("/Identity/Account/Manage/VisitExist");
+                }
+
+                visitToEdit.IdPatient = user.Id;
+                _context.Update(visitToEdit);
+                await _context.SaveChangesAsync();
+            }
+                return View();
         }
 
         // POST: Visits/Create

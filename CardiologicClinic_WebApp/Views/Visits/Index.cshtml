@@ -76,7 +76,8 @@
                 {
                     <tr>
                         <td>
-                            @vs.GetSpecificUser(item.IdPatient)
+                        @if (item.IdPatient == null) { item.IdPatient = ""; }
+                        @vs.GetSpecificUser(item.IdPatient)
                         </td>
                         <td>
                             @vs.GetSpecificUser(item.IdDoctor)
