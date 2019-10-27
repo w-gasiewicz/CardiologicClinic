@@ -84,6 +84,9 @@ namespace CardiologicClinic_WebApp.Controllers
             {
                 var userNew = new ApplicationUser { UserName = user.Email, Email = user.Email, Name = user.Name, PhoneNumber = user.PhoneNumber };
 
+                if (user.Email == null)
+                    return Redirect("/Identity/Account/Manage/UserExist");
+
                 var existingOne = _userManager.FindByEmailAsync(user.Email).Result;
                 if (existingOne != null)
                 {

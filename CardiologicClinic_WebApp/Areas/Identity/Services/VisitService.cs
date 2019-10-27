@@ -20,6 +20,11 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
         public static List<SelectListItem> Doctors { get; set; }
         public static List<SelectListItem> Visits { get; set; }
 
+        public void SortUsersToEditVisit(UserManager<ApplicationUser> _um, string id)
+        {
+
+        }
+
         public async System.Threading.Tasks.Task GetUsers(UserManager<ApplicationUser> _um)
         {
             Doctors = new List<SelectListItem>();
@@ -37,7 +42,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Services
                                               Text = a.Name + " " + a.UserSurname
                                           }).ToList();
 
-                Patients.Add(new SelectListItem
+                Patients.Insert(0, new SelectListItem
                 {
                     Value = null,
                     Text = null

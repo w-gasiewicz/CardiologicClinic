@@ -118,8 +118,8 @@ namespace CardiologicClinic_WebApp.Controllers
                 var patientVisits = _context.Visit.Where(v => v.IdPatient == visit.IdPatient).ToList();
                 var doctorVisits = _context.Visit.Where(v => v.IdDoctor == visit.IdDoctor).ToList();
 
-                patientVisits.RemoveAll(v => v.VisitDate.AddHours(-1) > visit.VisitDate || v.VisitDate.AddHours(1) < visit.VisitDate);
-                doctorVisits.RemoveAll(v => v.VisitDate.AddHours(-1) > visit.VisitDate || v.VisitDate.AddHours(1) < visit.VisitDate);
+                patientVisits.RemoveAll(v => v.VisitDate.AddHours(-1) >= visit.VisitDate || v.VisitDate.AddHours(1) <= visit.VisitDate);
+                doctorVisits.RemoveAll(v => v.VisitDate.AddHours(-1) >= visit.VisitDate || v.VisitDate.AddHours(1) <= visit.VisitDate);
 
                 if (patientVisits.Count == 0 && doctorVisits.Count == 0)
                 {

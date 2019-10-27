@@ -11,12 +11,14 @@ namespace CardiologicClinic_WebApp.Models
         [Display(Name = "Lekarz")]
         public string IdDoctor { get; set; }
         [Display(Name = "Data wizyty")]
+        [Required(ErrorMessage = "Data wizyty jest wymagana.")]
         public DateTime VisitDate { get; set; }
         [Display(Name = "Nazwa wizyty")]
         public string VisitName { get; set; }
         [Display(Name = "Cena")]
+        [Required(ErrorMessage = "Cena jest wymagana.")]
         public float Price { get; set; }
-        [Display(Name = "Notatka lekarza")]
+        [Display(Name = "Notatka lekarza")]        
         public string VisitNote { get; set; }
     }
 }
