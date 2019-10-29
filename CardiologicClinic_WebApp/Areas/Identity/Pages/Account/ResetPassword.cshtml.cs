@@ -27,17 +27,18 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "To nie jest poprawny adres email.")]
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} musi mieć conajmniej {2} i maksymalnie {1} znaków..", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Potwierdź hasło")]
+            [Compare("Password", ErrorMessage = "Wprowadzone hasła różnią się od siebie.")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
@@ -47,7 +48,7 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
         {
             if (code == null)
             {
-                return BadRequest("A code must be supplied for password reset.");
+                return BadRequest("Kod musi pasować do resetu hasła.");
             }
             else
             {

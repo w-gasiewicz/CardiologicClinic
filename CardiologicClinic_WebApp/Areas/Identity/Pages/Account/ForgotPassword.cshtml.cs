@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CardiologicClinic_WebApp.Models;
@@ -39,10 +41,10 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null /*|| !(await _userManager.IsEmailConfirmedAsync(user))*/)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    return RedirectToPage("./UserDontExistError");
                 }
 
                 // For more information on how to enable account confirmation and password reset please 
@@ -54,10 +56,21 @@ namespace CardiologicClinic_WebApp.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                try
+                {
+                    var client = new SmtpClient("smtp.gmail.com", 587)
+                    {
+                        Credentials = new NetworkCredential("gasiewicz.wojciech@gmail.com", "dzierio01928"),
+                        EnableSsl = true
+                    };
+                    client.Send("gasiewicz.wojciech@gmail.com", "gasiewicz.wojciech@gmail.com", "Klinika kardiologiczna - reset hasła",
+                    $"Proszę zresetować swoje hasło klikając w link: {HtmlEncoder.Default.Encode(callbackUrl)}");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.Clear();
+                    return RedirectToPage("./UserDontExistError");
+                }
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
