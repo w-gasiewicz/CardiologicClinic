@@ -1,7 +1,9 @@
 ﻿@model CardiologicClinic_WebApp.Models.Visit
+@using CardiologicClinic_WebApp.Areas.Identity.Services;
 
 @{
     ViewData["Title"] = "Szczegóły wizyty";
+    VisitService vs = new VisitService();
 }
 
 <h2>Szczegóły</h2>
@@ -14,13 +16,13 @@
             @Html.DisplayNameFor(model => model.IdPatient)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IdPatient)
+            @vs.GetSpecificUser(Model.IdPatient)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.IdDoctor)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IdDoctor)
+            @vs.GetSpecificUser(Model.IdDoctor)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.VisitDate)
