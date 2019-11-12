@@ -40,7 +40,6 @@ def DrawPlots(history):
 
 def Training():
 #read data
-    #data = pd.read_csv("danecsvintH.csv", sep=";")
     my_data = genfromtxt('danecsvintH.csv', delimiter=';')
     test = feat_select.SelectKBest(score_func=feat_select.chi2, k='all')
     X = my_data[1:, 0:59].astype('int')
