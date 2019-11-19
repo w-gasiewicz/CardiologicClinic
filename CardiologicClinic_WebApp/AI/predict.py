@@ -17,7 +17,7 @@ def PredictPatientData(model):
 def main():
     model = LoadModel()
     result = PredictPatientData(model)
-
+    
     filew = open("output.txt","w") 
     filew.write(str(result)) 
     filew.close()

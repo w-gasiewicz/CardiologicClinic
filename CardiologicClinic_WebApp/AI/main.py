@@ -12,6 +12,7 @@ np.random.seed(7)
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from keras import optimizers
+from sklearn.metrics import classification_report,confusion_matrix
 
 def Save(model):
     model.save('medical_module.h5')
@@ -92,6 +93,14 @@ def Training():
     print("\n aktualny najlepszy model: %s"%(actualResult))
     filer.close()
     aRF = float(actualResult)
+#conf matrix
+
+    Y_pred = model.predict(X_test)
+    y_pred = np.argmax(Y_pred, axis=1)
+
+    target_names = ['class 0', 'class 1', 'class 2', 'class 3','class 4']
+    print(classification_report(Y_test, y_pred,target_names=target_names))
+    print(confusion_matrix(Y_test, y_pred))
 
     if(aRF < scores[1]*100):
         filew = open("bestacc.txt","w") 
