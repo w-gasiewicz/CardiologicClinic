@@ -78,11 +78,11 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,UserSurname,Email,Password,PhoneNumber,Role")] ApplicationUser user)
+        public async Task<IActionResult> Create([Bind("Name","UserName,UserSurname,Email,Password,PhoneNumber,Role")] ApplicationUser user)
         {
             if (ModelState.IsValid)
             {
-                var userNew = new ApplicationUser { UserName = user.Email, Email = user.Email, Name = user.Name, PhoneNumber = user.PhoneNumber };
+                var userNew = new ApplicationUser { UserName = user.Email, Email = user.Email, Name = user.Name, PhoneNumber = user.PhoneNumber, UserSurname = user.UserSurname };
 
                 if (user.Email == null)
                     return Redirect("/Identity/Account/Manage/UserExist");
@@ -131,7 +131,7 @@ namespace CardiologicClinic_WebApp.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (true)
             {
                 try
                 {

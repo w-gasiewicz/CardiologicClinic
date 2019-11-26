@@ -154,7 +154,7 @@ namespace CardiologicClinic_WebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,IdPatient,IdDoctor,VisitDate,VisitName,VisitNote")] Visit visit)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,IdPatient,IdDoctor,VisitDate,VisitName,VisitNote,Price")] Visit visit)
         {
             if (id != visit.Id)
             {

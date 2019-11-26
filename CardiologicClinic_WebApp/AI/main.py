@@ -93,8 +93,8 @@ def Training():
     print("\n aktualny najlepszy model: %s"%(actualResult))
     filer.close()
     aRF = float(actualResult)
+    
 #conf matrix
-
     Y_pred = model.predict(X_test)
     y_pred = np.argmax(Y_pred, axis=1)
 
