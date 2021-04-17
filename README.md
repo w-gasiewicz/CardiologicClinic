@@ -12,7 +12,7 @@ Tech stack:
 - python + keras for AI module
 
 # System demo
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+![Alt Text](https://s4.gifyu.com/images/Strona-domowa---System-zarzadzania-klinika-kardiologiczna---Google-Chrome-2021-04-17-21-04-10.gif)
 
 # Database scheme
 ![erd](https://user-images.githubusercontent.com/25565263/115123906-9e663380-9fbf-11eb-814e-2318206d2810.PNG)
