@@ -12,7 +12,7 @@ Tech stack:
 - python + keras for AI module
 
 # System demo
-
+![demo](demo.gif)
 
 # Database scheme
 ![erd](https://user-images.githubusercontent.com/25565263/115123906-9e663380-9fbf-11eb-814e-2318206d2810.PNG)
